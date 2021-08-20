@@ -9,6 +9,14 @@ import Auth from "../components/Auth";
 const Home = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error) {
+    return null;
+  }
+
   return (
     <>
       {!user ? (
