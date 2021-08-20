@@ -5,86 +5,25 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState, useEffect } from 'react'
 import TodoList from "../components/TodoList";
 import Auth from "../components/Auth";
-interface Todo {
-  id: number;
-  message: string;
-  userId: string;
-}
 
 const Home = () => {
-  const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
-  const [text, setText] = useState('');
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [isChangedTodo, setIsChangedTodo] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const [todolists, todolistsLoading, todolistsError] = useCollection(
-    firebase.firestore().collection("chatList"),
-    {}
-  );
-
-  if (todolistsLoading && todolists) {
-    todolists.docs.map(doc => console.log(doc.data()));
+  if (loading) {
+    return <h6>Loading...</h6>;
   }
 
-  useEffect(() => {
-    (async () => {
-      const resTodo = await db.collection('chatList').doc('chat').get();
-      setTodos(resTodo.data().chat);
-      setIsLoading(false);
-    })();
-  }, [db])
-
-  useEffect(() => {
-    if (isChangedTodo) {
-      (async () => {
-        setIsLoading(true);
-        const docRef = await db.collection('chatList').doc('chat');
-        docRef.update({chat: todos});
-        setIsLoading(false);
-      })();
-    }
-  },[todos, isChangedTodo, db])
-
-  const handleOnSubmit = (
-    e: React.FormEvent<HTMLFormElement | HTMLInputElement>
-  ) => {
-    e.preventDefault();
-    if (!text) return;
-    setIsChangedTodo(true);
-    const newTodo: Todo = {
-      id: new Date().getTime(),
-      message: text,
-      userId: user.uid,
-    };
-    setTodos([...todos, newTodo]);
-    setText("");
-  };
+  if (error) {
+    return null;
+  }
 
   return (
     <>
-      {!user && <Auth />}
-      <ul>
-        {todos &&
-          todos.map((todo, index) => (
-            <div key={index}>
-              <TodoList
-                id={todo.id}
-                message={todo.message}
-                userId={todo.userId}
-              />
-            </div>
-          ))}
-      </ul>
-      <form onSubmit={e => handleOnSubmit(e)}>
-        <input
-          type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
-        />
-        <input type="submit" value="追加" onChange={e => handleOnSubmit(e)} />
-      </form>
+      {!user ? (
+        <Auth />
+      ) : (
+        <TodoList/>
+      )}
     </>
   );
 }
