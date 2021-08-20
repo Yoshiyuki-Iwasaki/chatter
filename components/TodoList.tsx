@@ -1,10 +1,8 @@
 import firebase from "../firebase/clientApp";
-import * as functions from "firebase-functions";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
-import Auth from "./Auth";
 
 interface Todo {
   id: number;
