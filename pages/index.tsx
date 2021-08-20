@@ -1,20 +1,19 @@
 import firebase from '../firebase/clientApp';
+import * as functions from "firebase-functions";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState, useEffect } from 'react'
-import Author from "../components/Author";
+import TodoList from "../components/TodoList";
 import Auth from "../components/Auth";
 interface Todo {
   id: number;
   message: string;
-  // username: string;
-  // avater: string;
+  userId: string;
 }
 
 const Home = () => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
-  console.log('loading', loading, '|', 'current user', user);
   const [text, setText] = useState('');
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
@@ -57,8 +56,7 @@ const Home = () => {
     const newTodo: Todo = {
       id: new Date().getTime(),
       message: text,
-      // username: '',
-      // avater: '',
+      userId: user.uid,
     };
     setTodos([...todos, newTodo]);
     setText("");
@@ -68,12 +66,16 @@ const Home = () => {
     <>
       {!user && <Auth />}
       <ul>
-        {todos && todos.map(todo => (
-          <li key={todo.id}>
-            {/* <Author  /> */}
-            <p>{todo.message}</p>
-          </li>
-        ))}
+        {todos &&
+          todos.map((todo, index) => (
+            <div key={index}>
+              <TodoList
+                id={todo.id}
+                message={todo.message}
+                userId={todo.userId}
+              />
+            </div>
+          ))}
       </ul>
       <form onSubmit={e => handleOnSubmit(e)}>
         <input
