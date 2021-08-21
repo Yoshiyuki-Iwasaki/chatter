@@ -61,20 +61,18 @@ const TodoList = () => {
     setText("");
   };
   return (
-    <div className="max-w-full mx-24">
+    <div className="mx-64">
       <ul>
         {todos &&
           todos.map((todo, index) => (
-            <ul key={index}>
-              <TodoItem
-                id={todo.id}
-                message={todo.message}
-                userId={todo.userId}
-              />
-            </ul>
+            <TodoItem
+              id={todo.id}
+              message={todo.message}
+              userId={todo.userId}
+            />
           ))}
       </ul>
-      <form className="mt-8 text-center" onSubmit={e => handleOnSubmit(e)}>
+      <form className="mt-12 mb-12 text-center" onSubmit={e => handleOnSubmit(e)}>
         <input
           className="mr-4 w-96 h-20 border"
           type="text"
