@@ -83,13 +83,13 @@ const TodoList = () => {
         onSubmit={e => handleOnSubmit(e)}
       >
         <input
-          className="mr-4 w-96 h-20 border"
+          className="mr-4 w-96 h-20 border p-2"
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
         />
         <input
-          className="p-2 bg-red-200"
+          className="p-2 bg-red-200 hover:opacity-70 transition-opacity"
           type="submit"
           value="追加"
           onChange={e => handleOnSubmit(e)}
