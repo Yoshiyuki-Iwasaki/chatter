@@ -5,7 +5,8 @@ module.exports = {
     extend: {},
   },
   variants: {
+    margin: ["responsive", "first", "last"],
     extend: {},
   },
   plugins: [],
-}
+};
