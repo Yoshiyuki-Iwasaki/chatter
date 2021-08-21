@@ -8,6 +8,7 @@ interface Todo {
   id: number;
   message: string;
   userId: string;
+  createdAt: string;
 }
 
 const TodoList = () => {
@@ -17,6 +18,9 @@ const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const convertJST = new Date();
+  convertJST.setHours(convertJST.getHours());
+  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
   const [todolists, todolistsLoading, todolistsError] = useCollection(
     firebase.firestore().collection("chatList"),
@@ -56,6 +60,7 @@ const TodoList = () => {
       id: new Date().getTime(),
       message: text,
       userId: user.uid,
+      createdAt: updatedTime,
     };
     setTodos([...todos, newTodo]);
     setText("");
@@ -69,10 +74,14 @@ const TodoList = () => {
               id={todo.id}
               message={todo.message}
               userId={todo.userId}
+              createdAt={todo.createdAt}
             />
           ))}
       </ul>
-      <form className="mt-12 mb-12 text-center" onSubmit={e => handleOnSubmit(e)}>
+      <form
+        className="mt-12 mb-12 text-center"
+        onSubmit={e => handleOnSubmit(e)}
+      >
         <input
           className="mr-4 w-96 h-20 border"
           type="text"
