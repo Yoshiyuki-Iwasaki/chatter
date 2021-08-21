@@ -21,11 +21,15 @@ const TodoItem = ({ id, message, userId }: Props): ReactElement => {
   }
 
   return (
-    <div key={id}>
-      <img src={value.data().photoURL} alt="" />
-      <h4>{value.data().displayName}</h4>
-      <div>
-        <p>{message}</p>
+    <div key={id} className="mt-8">
+      <div className="flex">
+        <figure className="w-12 rounded-3xl mr-4">
+          <img src={value.data().photoURL} alt="" />
+        </figure>
+        <div>
+          <h4>{value.data().displayName}</h4>
+          <p className="mt-1">{message}</p>
+        </div>
       </div>
     </div>
   );

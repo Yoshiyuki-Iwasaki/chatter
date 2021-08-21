@@ -1,7 +1,7 @@
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
 
 interface Todo {
@@ -61,7 +61,7 @@ const TodoList = () => {
     setText("");
   };
   return (
-    <>
+    <div className="max-w-full mx-24">
       <ul>
         {todos &&
           todos.map((todo, index) => (
@@ -74,15 +74,21 @@ const TodoList = () => {
             </ul>
           ))}
       </ul>
-      <form onSubmit={e => handleOnSubmit(e)}>
+      <form className="mt-8 text-center" onSubmit={e => handleOnSubmit(e)}>
         <input
+          className="mr-4 w-96 h-20 border"
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
         />
-        <input type="submit" value="追加" onChange={e => handleOnSubmit(e)} />
+        <input
+          className="p-2 bg-red-200"
+          type="submit"
+          value="追加"
+          onChange={e => handleOnSubmit(e)}
+        />
       </form>
-    </>
+    </div>
   );
 };
 
