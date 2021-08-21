@@ -26,8 +26,8 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     value.data().uid === user.uid ? "justify-end" : "justify-start";
 
   return (
-    <li key={id} className={`mt-8 flex ${messageClass}`}>
-      <div className={`p-4 bg-blue-50 w-96 rounded-lg flex`}>
+    <li key={id} className={`mt-8 first:mt-0 flex ${messageClass}`}>
+      <div className={`p-4 bg-blue-50 md:w-96 rounded-lg flex`}>
         <figure className="w-1/5 mr-4">
           <img
             className="rounded-full w-full"
