@@ -7,9 +7,10 @@ interface Props {
   id: number;
   message: string;
   userId: string;
+  createdAt: string;
 }
 
-const TodoItem = ({ id, message, userId }: Props): ReactElement => {
+const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
   const [user, userLoading, userError] = useAuthState(firebase.auth());
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
@@ -35,7 +36,10 @@ const TodoItem = ({ id, message, userId }: Props): ReactElement => {
           />
         </figure>
         <div className="w-4/5">
-          <h4 className="font-bold">{value.data().displayName}</h4>
+          <div className="flex justify-between">
+            <h4 className="font-bold">{value.data().displayName}</h4>
+            <p className="text-sm text-gray-600">{createdAt}</p>
+          </div>
           <p className="mt-1">{message}</p>
         </div>
       </div>
