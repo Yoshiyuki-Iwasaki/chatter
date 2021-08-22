@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
+import marked from "marked";
+
 interface Props {
   id: number;
   message: string;
@@ -28,14 +30,21 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     <li key={id} className={`mt-8 first:mt-0 flex ${messageClass}`}>
       <div className={`p-4 bg-blue-50 md:w-96 rounded-lg flex`}>
         <figure className="w-1/5 mr-4">
-          <img className={"rounded-full w-full"} src={value.data().photoURL}/>
+          <img className={"rounded-full w-full"} src={value.data().photoURL} />
         </figure>
         <div className="w-4/5">
           <div className="flex justify-between">
             <h4 className="font-bold">{value.data().displayName}</h4>
             <p className="text-sm text-gray-600">{createdAt}</p>
           </div>
-          <p className="mt-1">{message}</p>
+          <div className="mde-preview">
+            <div className="mde-preview-content">
+              <span
+                className="mt-1"
+                dangerouslySetInnerHTML={{ __html: marked(message) }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </li>
