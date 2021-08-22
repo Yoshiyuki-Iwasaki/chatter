@@ -3,7 +3,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
+import ReactMde from "react-mde";
+import * as Showdown from "showdown";
+import marked from 'marked';
 
+const converter = new Showdown.Converter({
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true,
+});
 interface Todo {
   id: number;
   message: string;
@@ -21,6 +30,10 @@ const TodoList = () => {
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
+  const [selectedTab, setSelectedTab] = React.useState<"write" | "preview">(
+    "write"
+  );
+
 
   const [todolists, todolistsLoading, todolistsError] = useCollection(
     firebase.firestore().collection("chatList"),
@@ -50,9 +63,7 @@ const TodoList = () => {
     }
   }, [todos, isChangedTodo, db]);
 
-  const handleOnSubmit = (
-    e: React.FormEvent<HTMLFormElement | HTMLInputElement>
-  ) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     if (!text) return;
     setIsChangedTodo(true);
@@ -71,6 +82,7 @@ const TodoList = () => {
         {todos &&
           todos.map((todo, index) => (
             <TodoItem
+              key={index}
               id={todo.id}
               message={todo.message}
               userId={todo.userId}
@@ -83,18 +95,21 @@ const TodoList = () => {
         onSubmit={e => handleOnSubmit(e)}
       >
         <input
-          className="mr-4 md:w-96 h-20 border p-2"
-          type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
-        />
-        <input
           className="p-2 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
           type="submit"
           value="追加"
           onChange={e => handleOnSubmit(e)}
         />
       </form>
+      <ReactMde
+        value={text}
+        onChange={setText}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+        generateMarkdownPreview={markdown =>
+          Promise.resolve(marked(markdown))
+        }
+      />
     </div>
   );
 };
