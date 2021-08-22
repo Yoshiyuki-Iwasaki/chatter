@@ -71,6 +71,7 @@ const TodoList = () => {
         {todos &&
           todos.map((todo, index) => (
             <TodoItem
+              key={index}
               id={todo.id}
               message={todo.message}
               userId={todo.userId}
