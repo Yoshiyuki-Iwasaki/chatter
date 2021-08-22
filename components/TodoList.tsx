@@ -93,14 +93,11 @@ const TodoList = () => {
               />
             ))}
         </ul>
-        <form
-          className="mt-12 mb-12 text-center"
-          onSubmit={e => handleOnSubmit(e)}
-        >
+        <form className="mt-12 text-right" onSubmit={e => handleOnSubmit(e)}>
           <input
-            className="p-2 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
+            className="py-2 px-24 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
             type="submit"
-            value="追加"
+            value="投稿"
             onChange={e => handleOnSubmit(e)}
           />
         </form>
