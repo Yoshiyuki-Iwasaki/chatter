@@ -6,6 +6,7 @@ import TodoItem from "./TodoItem";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import marked from 'marked';
+import Header from './Header'
 
 const converter = new Showdown.Converter({
   tables: true,
@@ -77,40 +78,43 @@ const TodoList = () => {
     setText("");
   };
   return (
-    <div className="mt-8 md:w-9/12 p-3 md:p-0 mx-auto">
-      <ul>
-        {todos &&
-          todos.map((todo, index) => (
-            <TodoItem
-              key={index}
-              id={todo.id}
-              message={todo.message}
-              userId={todo.userId}
-              createdAt={todo.createdAt}
-            />
-          ))}
-      </ul>
-      <form
-        className="mt-12 mb-12 text-center"
-        onSubmit={e => handleOnSubmit(e)}
-      >
-        <input
-          className="p-2 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
-          type="submit"
-          value="追加"
-          onChange={e => handleOnSubmit(e)}
+    <>
+      <Header />
+      <div className="m-24 md:w-9/12 p-3 md:p-0 mx-auto">
+        <ul>
+          {todos &&
+            todos.map((todo, index) => (
+              <TodoItem
+                key={index}
+                id={todo.id}
+                message={todo.message}
+                userId={todo.userId}
+                createdAt={todo.createdAt}
+              />
+            ))}
+        </ul>
+        <form
+          className="mt-12 mb-12 text-center"
+          onSubmit={e => handleOnSubmit(e)}
+        >
+          <input
+            className="p-2 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
+            type="submit"
+            value="追加"
+            onChange={e => handleOnSubmit(e)}
+          />
+        </form>
+        <ReactMde
+          value={text}
+          onChange={setText}
+          selectedTab={selectedTab}
+          onTabChange={setSelectedTab}
+          generateMarkdownPreview={markdown =>
+            Promise.resolve(marked(markdown))
+          }
         />
-      </form>
-      <ReactMde
-        value={text}
-        onChange={setText}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={markdown =>
-          Promise.resolve(marked(markdown))
-        }
-      />
-    </div>
+      </div>
+    </>
   );
 };
 
