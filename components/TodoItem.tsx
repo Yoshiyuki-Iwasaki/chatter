@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
+import Image from "next/image";
 
 interface Props {
   id: number;
@@ -29,11 +30,12 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     <li key={id} className={`mt-8 first:mt-0 flex ${messageClass}`}>
       <div className={`p-4 bg-blue-50 md:w-96 rounded-lg flex`}>
         <figure className="w-1/5 mr-4">
-          <img
-            className="rounded-full w-full"
+          {/* <image
+            className={"rounded-full w-full"}
             src={value.data().photoURL}
-            alt=""
-          />
+            width={24}
+            height={24}
+          /> */}
         </figure>
         <div className="w-4/5">
           <div className="flex justify-between">
