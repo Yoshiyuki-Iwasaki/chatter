@@ -29,16 +29,23 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
   return (
     <li key={id} className={`mde-preview mt-8 first:mt-0 flex ${messageClass}`}>
       <div className={`mde-preview-content bg-blue-50 md:w-96 rounded-lg flex`}>
-        <figure className="w-1/5 mr-4">
+        <a href={`/user/${value.data().uid}`} className="w-1/5 mr-4">
           <img className={"rounded-full w-full"} src={value.data().photoURL} />
-        </figure>
+        </a>
         <div className="w-4/5">
           <div className="flex justify-between">
-            <h4 className="font-bold">{value.data().displayName}</h4>
+            <h4 className="font-bold">
+              <a href={`/user/${value.data().uid}`}>
+                {value.data().displayName}
+              </a>
+            </h4>
             <p className="text-sm text-gray-600">{createdAt}</p>
           </div>
           <div>
-            <span className="mt-1" dangerouslySetInnerHTML={{ __html: marked(message) }}/>
+            <span
+              className="mt-1"
+              dangerouslySetInnerHTML={{ __html: marked(message) }}
+            />
           </div>
         </div>
       </div>
