@@ -3,6 +3,7 @@ import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Auth from "../../components/Auth";
 import User from "../../components/User";
+import Layout from "../../components/Layout";
 
 const UserDetail = ({ todo }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -14,7 +15,7 @@ const UserDetail = ({ todo }) => {
     return null;
   }
 
-  return <>{!user ? <Auth /> : <User todo={todo} />}</>;
+  return <Layout>{!user ? <Auth /> : <User todo={todo} />}</Layout>;
 };
 
 export default UserDetail
