@@ -28,7 +28,9 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
 
   return (
     <li key={id} className={`mde-preview mt-8 first:mt-0 flex ${messageClass}`}>
-      <div className={`mde-preview-content bg-blue-50 md:w-96 rounded-lg flex`}>
+      <div
+        className={`mde-preview-content md:w-96 border-4 border-light-blue-500 border-opacity-25 rounded-lg flex`}
+      >
         <a href={`/user/${value.data().uid}`} className="w-1/5 mr-4">
           <img className={"rounded-full w-full"} src={value.data().photoURL} />
         </a>
