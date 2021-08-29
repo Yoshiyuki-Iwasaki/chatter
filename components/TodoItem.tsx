@@ -27,8 +27,8 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     value.data().uid === user.uid ? "justify-end" : "justify-start";
 
   return (
-    <li key={id} className={`mt-8 first:mt-0 flex ${messageClass}`}>
-      <div className={`p-4 bg-blue-50 md:w-96 rounded-lg flex`}>
+    <li key={id} className={`mde-preview mt-8 first:mt-0 flex ${messageClass}`}>
+      <div className={`mde-preview-content bg-blue-50 md:w-96 rounded-lg flex`}>
         <figure className="w-1/5 mr-4">
           <img className={"rounded-full w-full"} src={value.data().photoURL} />
         </figure>
@@ -37,13 +37,8 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
             <h4 className="font-bold">{value.data().displayName}</h4>
             <p className="text-sm text-gray-600">{createdAt}</p>
           </div>
-          <div className="mde-preview">
-            <div className="mde-preview-content">
-              <span
-                className="mt-1"
-                dangerouslySetInnerHTML={{ __html: marked(message) }}
-              />
-            </div>
+          <div>
+            <span className="mt-1" dangerouslySetInnerHTML={{ __html: marked(message) }}/>
           </div>
         </div>
       </div>
