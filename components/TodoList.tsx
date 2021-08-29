@@ -79,38 +79,35 @@ const TodoList = () => {
   };
   return (
     <>
-      <Header />
-      <div className="m-24 md:w-9/12 p-3 md:p-0 mx-auto">
-        <ul>
-          {todos &&
-            todos.map((todo, index) => (
-              <TodoItem
-                key={index}
-                id={todo.id}
-                message={todo.message}
-                userId={todo.userId}
-                createdAt={todo.createdAt}
-              />
-            ))}
-        </ul>
-        <form className="mt-12 text-right" onSubmit={e => handleOnSubmit(e)}>
-          <input
-            className="py-2 px-24 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
-            type="submit"
-            value="投稿"
-            onChange={e => handleOnSubmit(e)}
-          />
-        </form>
-        <ReactMde
-          value={text}
-          onChange={setText}
-          selectedTab={selectedTab}
-          onTabChange={setSelectedTab}
-          generateMarkdownPreview={markdown =>
-            Promise.resolve(marked(markdown))
-          }
+      <ul>
+        {todos &&
+          todos.map((todo, index) => (
+            <TodoItem
+              key={index}
+              id={todo.id}
+              message={todo.message}
+              userId={todo.userId}
+              createdAt={todo.createdAt}
+            />
+          ))}
+      </ul>
+      <form className="mt-12 text-right" onSubmit={e => handleOnSubmit(e)}>
+        <input
+          className="py-2 px-24 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
+          type="submit"
+          value="投稿"
+          onChange={e => handleOnSubmit(e)}
         />
-      </div>
+      </form>
+      <ReactMde
+        value={text}
+        onChange={setText}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+        generateMarkdownPreview={markdown =>
+          Promise.resolve(marked(markdown))
+        }
+      />
     </>
   );
 };
