@@ -19,7 +19,7 @@ const uiConfig = {
 const Auth = () => {
   return (
     <>
-      <p>Please sign-in:</p>
+      <h2 className='text-center'>Please sign-in:</h2>
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </>
   );
