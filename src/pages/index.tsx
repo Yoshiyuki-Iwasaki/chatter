@@ -1,4 +1,4 @@
-import firebase from '../firebase/clientApp';
+import firebase from '../../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import TodoList from "../components/TodoList";
 import Auth from "../components/Auth";
