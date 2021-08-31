@@ -17,9 +17,18 @@ const Header = () => {
   }
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-100 mx-auto">
-      <div className="md:w-9/12 p-3 text-right mx-auto flex justify-end">
+      <div className="md:w-9/12 p-3 text-right mx-auto flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-wide">
+          <a href="/">chatter</a>
+        </h1>
         <div className="w-48 flex justify-between	items-center">
-          {!user ? "" : <p>{user.displayName}</p>}
+          {!user ? (
+            ""
+          ) : (
+            <p className="text-1xl font-bold tracking-wide">
+              {user.displayName}
+            </p>
+          )}
           <button
             onClick={() => logout()}
             className="bg-gray-500 text-white font-medium p-4"
