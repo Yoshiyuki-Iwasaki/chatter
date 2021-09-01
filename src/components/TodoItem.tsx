@@ -3,6 +3,7 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import marked from "marked";
+import Like from "./Like";
 
 interface Props {
   id: number;
@@ -49,6 +50,7 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
               dangerouslySetInnerHTML={{ __html: marked(message) }}
             />
           </div>
+          <Like id={id} />
         </div>
       </div>
     </li>
