@@ -32,14 +32,17 @@ const User = ({ todo }) => {
       <h1 className="mt-3 text-center text-2xl font-bold">
         {todo.displayName}
       </h1>
-      {todo.description && <p>{todo.description}</p>}
-      <form onSubmit={e => handleOnSubmit(e)}>
+      {todo.description && (
+        <p className="mt-5 text-center">{todo.description}</p>
+      )}
+      <form className="mt-5 text-center" onSubmit={e => handleOnSubmit(e)}>
         <input
+          className="border-4 border-light-blue-500 border-opacity-25"
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
         />
-        <input type="submit" onClick={e => handleOnSubmit(e)} value="投稿" />
+        <input className='ml-2 p-1' type="submit" onClick={e => handleOnSubmit(e)} value="投稿" />
       </form>
     </>
   );

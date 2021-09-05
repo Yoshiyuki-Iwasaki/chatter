@@ -24,23 +24,24 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
   if (error) {
     return null;
   }
-  const messageClass =
-    value.data().uid === user.uid ? "justify-end" : "justify-start";
+
+  const messageClass = userId === user.uid ? "justify-end" : "justify-start";
 
   return (
-    <li key={id} className={`mde-preview mt-8 first:mt-0 flex ${messageClass}`}>
+    <li
+      key={id}
+      className={`mde-preview mt-8 first:mt-0 flex ${messageClass} `}
+    >
       <div
         className={`mde-preview-content md:w-96 border-4 border-light-blue-500 border-opacity-25 rounded-lg flex`}
       >
-        <a href={`/user/${value.data().uid}`} className="w-1/5 mr-4">
-          <img className={"rounded-full w-full"} src={value.data().photoURL} />
+        <a href={`/user/${user.uid}`} className="w-1/5 mr-4">
+          <img className={"rounded-full w-full"} src={user.photoURL} />
         </a>
         <div className="w-4/5">
           <div className="flex justify-between">
             <h4 className="font-bold">
-              <a href={`/user/${value.data().uid}`}>
-                {value.data().displayName}
-              </a>
+              <a href={`/user/${user.uid}`}>{user.displayName}</a>
             </h4>
             <p className="text-sm text-gray-600">{createdAt}</p>
           </div>
