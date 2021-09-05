@@ -1,13 +1,10 @@
 import firebase from "../../firebase/clientApp";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { useDocument } from "react-firebase-hooks/firestore";
 import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import marked from 'marked';
-import Header from './Header'
 
 const converter = new Showdown.Converter({
   tables: true,
@@ -15,6 +12,7 @@ const converter = new Showdown.Converter({
   strikethrough: true,
   tasklists: true,
 });
+
 interface Todo {
   id: number;
   message: string;
@@ -25,9 +23,6 @@ interface Todo {
 const TodoList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [isChangedTodo, setIsChangedTodo] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
@@ -43,7 +38,6 @@ const TodoList = () => {
   const handleOnSubmit = async e => {
     e.preventDefault();
     if (!text) return;
-    setIsChangedTodo(true);
     await db.collection("chatList").add({
       id: new Date().getTime(),
       message: text,
