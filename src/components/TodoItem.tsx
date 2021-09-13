@@ -18,11 +18,11 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     firebase.firestore().doc(`users/${userId}`)
   );
 
-  if (loading) {
+  if (loading || userLoading) {
     return <h6>Loading...</h6>;
   }
 
-  if (error) {
+  if (error || userError) {
     return null;
   }
 
@@ -36,13 +36,15 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
       <div
         className={`mde-preview-content md:w-96 border-4 border-light-blue-500 border-opacity-25 rounded-lg flex`}
       >
-        <a href={`/user/${user.uid}`} className="w-1/5 mr-4">
-          <img className={"rounded-full w-full"} src={user.photoURL} />
+        <a href={`/user/${value.data().uid}`} className="w-1/5 mr-4">
+          <img className={"rounded-full w-full"} src={value.data().photoURL} />
         </a>
         <div className="w-4/5">
           <div className="flex justify-between">
             <h4 className="font-bold">
-              <a href={`/user/${user.uid}`}>{user.displayName}</a>
+              <a href={`/user/${value.data().uid}`}>
+                {value.data().displayName}
+              </a>
             </h4>
             <p className="text-sm text-gray-600">{createdAt}</p>
           </div>
