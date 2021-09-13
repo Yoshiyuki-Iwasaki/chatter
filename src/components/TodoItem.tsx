@@ -21,6 +21,7 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
   if (loading) {
     return <h6>Loading...</h6>;
   }
+
   if (error) {
     return null;
   }
@@ -51,7 +52,7 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
               dangerouslySetInnerHTML={{ __html: marked(message) }}
             />
           </div>
-          <Like id={id} />
+          <Like postId={id} />
         </div>
       </div>
     </li>
