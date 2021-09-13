@@ -31,9 +31,27 @@ const TodoList = () => {
   );
 
   const [todolists, todolistsLoading, todolistsError] = useCollection(
-    firebase.firestore().collection("chatList").orderBy("id", "asc"),
+    db.collection("chatList").orderBy("id", "asc"),
     {}
   );
+
+  const asyncFunction = async () => {
+    firebase
+    .firestore()
+    .collectionGroup("posts")
+    .get()
+    .then(snapshot => {
+      const list = [];
+      snapshot.forEach(doc => {
+        list.push(doc.data().id);
+      });
+      return Promise.all(list);
+    });
+  }
+
+  useEffect(() => {
+    asyncFunction();
+  },[])
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -46,12 +64,12 @@ const TodoList = () => {
     });
     setText("");
   };
-    if (todolistsLoading) {
-      return <h6>Loading...</h6>;
-    }
-    if (todolistsError) {
-      return null;
-    }
+  if (todolistsLoading) {
+    return <h6>Loading...</h6>;
+  }
+  if (todolistsError) {
+    return null;
+  }
   return (
     <>
       <ul>
