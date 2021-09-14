@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
+import styled from "styled-components";
 
 interface Like {
   id: number;
@@ -77,18 +78,26 @@ const Like = ({ postId }) => {
     setDone(false);
   };
 
+  const Button = styled.button`
+    margin-top: 10px;
+    font-size: 15px;
+    color: gray;
+  `;
+
+  const LikeCount = styled.button`
+    margin-left: 10px;
+    font-size: 15px;
+    color: gray;
+  `;
+
   return (
     <>
       {!done ? (
-        <button className="mt-2" onClick={clickLikeButton}>
-          いいね
-        </button>
+        <Button onClick={clickLikeButton}>いいね</Button>
       ) : (
-        <button className="mt-2" onClick={clickRemoveLikeButton}>
-          いいね済み
-        </button>
+        <Button onClick={clickRemoveLikeButton}>いいね済み</Button>
       )}
-      <span className='ml-1'>{likeCount}</span>
+      <LikeCount>{likeCount}</LikeCount>
     </>
   );
 };
