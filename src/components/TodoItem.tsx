@@ -4,15 +4,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "./Like";
+import styled from "styled-components";
 
 interface Props {
+  key: number;
   id: number;
   message: string;
   userId: string;
   createdAt: string;
 }
 
-const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
+const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
   const [user, userLoading, userError] = useAuthState(firebase.auth());
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
@@ -26,38 +28,73 @@ const TodoItem = ({ id, message, userId, createdAt }: Props): ReactElement => {
     return null;
   }
 
-  const messageClass = userId === user.uid ? "justify-end" : "justify-start";
+  const List = styled.li`
+    margin-top: 25px;
+    display: flex;
+    justify-content: ${userId === user.uid ? "flex-end" : "flex-start"};
+  `;
+
+  const Inner = styled.div`
+    padding: 10px;
+    display: flex;
+    border: 1px solid gray;
+    width: 30%;
+  `;
+
+  const IconArea = styled.a`
+    width: calc(100% / 5);
+    margin-right: 20px;
+  `;
+
+  const Icon = styled.img`
+    width: 100%;
+  `;
+
+  const TextArea = styled.div`
+    width: calc(100% - (100% / 5));
+  `;
+  const TextAreaInner = styled.div`
+    display:flex;
+    justify-content: space-between;
+  `;
+  const Title = styled.h4`
+    font-size: 15px;
+    color: gray;
+    font-weight: 700;
+  `;
+  const Text = styled.p`
+    font-size: 15px;
+    color: gray;
+  `
+  const Body = styled.div`
+    margin-top: 10px;
+    font-size: 15px;
+    color: gray;
+  `;
 
   return (
-    <li
-      key={id}
-      className={`mde-preview mt-8 first:mt-0 flex ${messageClass} `}
-    >
-      <div
-        className={`mde-preview-content md:w-80 border-4 border-light-blue-500 border-opacity-25 rounded-lg flex`}
-      >
-        <a href={`/user/${value.data().uid}`} className="w-1/5 mr-4">
-          <img className={"rounded-full w-full"} src={value.data().photoURL} />
-        </a>
-        <div className="w-4/5">
-          <div className="flex justify-between">
-            <h4 className="font-bold">
+    <List key={key}>
+      <Inner>
+        <IconArea href={`/user/${value.data().uid}`}>
+          <Icon src={value.data().photoURL} />
+        </IconArea>
+        <TextArea>
+          <TextAreaInner>
+            <Title>
               <a href={`/user/${value.data().uid}`}>
                 {value.data().displayName}
               </a>
-            </h4>
-            <p className="text-sm text-gray-600">{createdAt}</p>
-          </div>
-          <div>
-            <span
-              className="mt-1"
-              dangerouslySetInnerHTML={{ __html: marked(message) }}
-            />
-          </div>
+            </Title>
+            <Text>{createdAt}</Text>
+          </TextAreaInner>
+          <Body
+            className="mt-1"
+            dangerouslySetInnerHTML={{ __html: marked(message) }}
+          />
           <Like postId={id} />
-        </div>
-      </div>
-    </li>
+        </TextArea>
+      </Inner>
+    </List>
   );
 };
 

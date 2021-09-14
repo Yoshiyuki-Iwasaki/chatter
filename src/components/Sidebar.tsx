@@ -1,5 +1,19 @@
 import firebase from "../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
+import styled from "styled-components";
+
+const Title = styled.h2`
+  padding: 10px;
+  background: gray;
+  color: #fff;
+  font-weight: 500;
+  margin-top: ${props => (props.marginTop ? props.marginTop : "")};
+`;
+const Text = styled.a`
+  padding: 10px;
+  display: block;
+  font-weight: 500;
+`;
 
 const Sidebar = () => {
   const db = firebase.firestore();
@@ -13,40 +27,36 @@ const Sidebar = () => {
   if (error) {
     return null;
   }
+
   return (
     <>
-      <h2 className="bg-gray-500 text-white font-medium p-3">ユーザーリスト</h2>
+      <Title>ユーザーリスト</Title>
       <ul>
         {usersList &&
           usersList.docs.map((doc, index) => (
             <li key={index}>
-              <a
-                href={`user/${doc.data().uid}`}
-                className="block font-medium p-2"
-              >
+              <Text href={`user/${doc.data().uid}`}>
                 {doc.data().displayName}
-              </a>
+              </Text>
             </li>
           ))}
       </ul>
-      <h2 className="mt-10 bg-gray-500 text-white font-medium p-3">
-        グループリスト
-      </h2>
+      <Title marginTop="20px">グループリスト</Title>
       <ul>
         <li>
-          <a href="" className="block font-medium p-2">
+          <Text href="">
             グループ
-          </a>
+          </Text>
         </li>
         <li>
-          <a href="" className="block font-medium p-2">
+          <Text href="">
             グループ
-          </a>
+          </Text>
         </li>
         <li>
-          <a href="" className="block font-medium p-2">
+          <Text href="">
             グループ
-          </a>
+          </Text>
         </li>
       </ul>
     </>

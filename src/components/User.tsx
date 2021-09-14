@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import firebase from "../../firebase/clientApp";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import styled from "styled-components";
 
 const User = ({ todo }) => {
   const db = firebase.firestore();
@@ -38,37 +39,61 @@ const User = ({ todo }) => {
       createdAt: updatedTime,
     });
   };
+
+  const IconArea = styled.figure`
+    margin: 0 auto;
+    width: 500px;
+  `;
+
+  const Icon = styled.img`
+    width: 100%;
+    border: 1px solid gray;
+  `;
+
+  const Title = styled.h1`
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+  `;
+  const Description = styled.p`
+    margin-top: 10px;
+    text-align: center;
+  `;
+  const Form = styled.form`
+    margin-top: 10px;
+    text-align: center;
+  `;
+  const InputField = styled.input`
+    border: 1px solid gray;
+  `;
+  const InputButton = styled.input`
+    margin-left: 10px;
+    padding: 5px;
+  `;
+
   return (
     <>
-      <figure className="w-1/5 mx-auto">
-        <img
-          className="rounded-full w-full border-4 border-light-blue-500 border-opacity-25"
-          src={todo.photoURL}
-        />
-      </figure>
-      <h1 className="mt-3 text-center text-2xl font-bold">
-        {todo.displayName}
-      </h1>
+      <IconArea>
+        <Icon src={todo.photoURL} />
+      </IconArea>
+      <Title>{todo.displayName}</Title>
       <a href="#" onClick={clickLikeButton}>
         {todo.displayName}とプライベートチャットをする
       </a>
-      {todo.description && (
-        <p className="mt-5 text-center">{todo.description}</p>
-      )}
-      <form className="mt-5 text-center" onSubmit={e => handleOnSubmit(e)}>
-        <input
-          className="border-4 border-light-blue-500 border-opacity-25"
+      {todo.description && <Description>{todo.description}</Description>}
+      <Form onSubmit={e => handleOnSubmit(e)}>
+        <InputField
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
         />
-        <input
-          className="ml-2 p-1"
+        <InputButton
           type="submit"
           onClick={e => handleOnSubmit(e)}
           value="投稿"
         />
-      </form>
+      </Form>
     </>
   );
 };

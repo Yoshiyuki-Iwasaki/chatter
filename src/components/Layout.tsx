@@ -1,19 +1,35 @@
 import React from 'react'
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import styled from "styled-components";
 
 const Layout = ({ children }) => {
+  const Main = styled.div`
+    margin: 120px auto 0;
+  `
+  const Inner = styled.div`
+    display: flex;
+    width: 100%;
+  `
+  const SidebarArea = styled.div`
+    background: rgba(243, 244, 246, 0.8);
+    width: calc(100% / 6);
+  `;
+  const ChatArea = styled.div`
+    margin: 0 20px;
+    width: calc(100% - (100% / 6));
+  `;
   return (
     <>
       <Header />
-      <div className="mt-28 md:w-9/12 p-3 md:p-0 mx-auto mb-16">
-        <div className="flex">
-          <div className="mr-5 md:w-1/6 bg-gray-100">
+      <Main>
+        <Inner>
+          <SidebarArea>
             <Sidebar />
-          </div>
-          <div className="md:w-5/6">{children}</div>
-        </div>
-      </div>
+          </SidebarArea>
+          <ChatArea>{children}</ChatArea>
+        </Inner>
+      </Main>
     </>
   );
 }

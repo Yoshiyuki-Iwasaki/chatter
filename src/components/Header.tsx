@@ -1,43 +1,73 @@
 import React from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
-
+import styled from 'styled-components';
 
 const Header = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const logout = () => {
     firebase.auth().signOut();
   }
-
   if (loading) {
     return <h6>Loading...</h6>;
   }
   if (error) {
     return null;
   }
+  const Header = styled.header`
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(243, 244, 246, 0.8);
+  `;
+  const Inner = styled.div`
+    margin: 0 auto;
+    padding: 15px 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `;
+  const Title = styled.div`
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.025em;
+  `;
+  const LeftArea = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `;
+  const Button = styled.button`
+    margin-left: 15px;
+    padding: 15px;
+    background: gray;
+    color: #fff;
+    font-weight: 700;
+  `
+  const Text = styled.p`
+    font-size: 15px;
+    letter-spacing: 0.025em;
+    font-weight: 700;
+  `;
   return (
-    <header className="fixed top-0 left-0 w-full bg-gray-100 mx-auto">
-      <div className="md:w-9/12 p-3 text-right mx-auto flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-wide">
+    <Header>
+      <Inner>
+        <Title>
           <a href="/">chatter</a>
-        </h1>
-        <div className="w-48 flex justify-between	items-center">
+        </Title>
+        <LeftArea>
           {!user ? (
             ""
           ) : (
-            <p className="text-1xl font-bold tracking-wide">
-              {user.displayName}
-            </p>
+            <Text>{user.displayName}</Text>
           )}
-          <button
-            onClick={() => logout()}
-            className="bg-gray-500 text-white font-medium p-4"
-          >
-            ログアウト
-          </button>
-        </div>
-      </div>
-    </header>
+          <Button onClick={() => logout()}>ログアウト</Button>
+        </LeftArea>
+      </Inner>
+    </Header>
   );
 }
 
