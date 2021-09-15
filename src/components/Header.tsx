@@ -16,9 +16,6 @@ const Header = () => {
   }
   const Header = styled.header`
     margin: 0 auto;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     background: rgba(243, 244, 246, 0.8);
   `;
@@ -31,6 +28,8 @@ const Header = () => {
     justify-content: space-between;
   `;
   const Title = styled.div`
+  `;
+  const Link = styled.a`
     font-weight: 700;
     font-size: 28px;
     letter-spacing: 0.025em;
@@ -56,14 +55,10 @@ const Header = () => {
     <Header>
       <Inner>
         <Title>
-          <a href="/">chatter</a>
+          <Link href="/">chatter</Link>
         </Title>
         <LeftArea>
-          {!user ? (
-            ""
-          ) : (
-            <Text>{user.displayName}</Text>
-          )}
+          {!user ? "" : <Text>{user.displayName}</Text>}
           <Button onClick={() => logout()}>ログアウト</Button>
         </LeftArea>
       </Inner>

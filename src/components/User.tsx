@@ -41,13 +41,14 @@ const User = ({ todo }) => {
   };
 
   const IconArea = styled.figure`
-    margin: 0 auto;
-    width: 500px;
+    margin: 20px auto 0;
+    width: 150px;
   `;
 
   const Icon = styled.img`
     width: 100%;
     border: 1px solid gray;
+    border-radius: 50%;
   `;
 
   const Title = styled.h1`

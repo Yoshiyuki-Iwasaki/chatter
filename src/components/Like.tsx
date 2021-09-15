@@ -79,13 +79,13 @@ const Like = ({ postId }) => {
   };
 
   const Button = styled.button`
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 15px;
     color: gray;
   `;
 
   const LikeCount = styled.button`
-    margin-left: 10px;
+    margin-left: 20px;
     font-size: 15px;
     color: gray;
   `;

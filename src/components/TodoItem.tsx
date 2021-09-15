@@ -38,7 +38,7 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
     padding: 10px;
     display: flex;
     border: 1px solid gray;
-    width: 30%;
+    width: 35%;
   `;
 
   const IconArea = styled.a`
@@ -48,28 +48,35 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
 
   const Icon = styled.img`
     width: 100%;
+    border-radius: 50%;
   `;
 
   const TextArea = styled.div`
     width: calc(100% - (100% / 5));
   `;
   const TextAreaInner = styled.div`
-    display:flex;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   `;
   const Title = styled.h4`
+  `;
+  const TitleLink = styled.a`
     font-size: 15px;
     color: gray;
     font-weight: 700;
   `;
-  const Text = styled.p`
-    font-size: 15px;
+  const Date = styled.p`
+    font-size: 12px;
     color: gray;
-  `
+  `;
   const Body = styled.div`
-    margin-top: 10px;
-    font-size: 15px;
-    color: gray;
+    margin-top: 20px;
+
+    > p {
+      font-size: 15px;
+      color: gray;
+    }
   `;
 
   return (
@@ -81,16 +88,13 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
         <TextArea>
           <TextAreaInner>
             <Title>
-              <a href={`/user/${value.data().uid}`}>
+              <TitleLink href={`/user/${value.data().uid}`}>
                 {value.data().displayName}
-              </a>
+              </TitleLink>
             </Title>
-            <Text>{createdAt}</Text>
+            <Date>{createdAt}</Date>
           </TextAreaInner>
-          <Body
-            className="mt-1"
-            dangerouslySetInnerHTML={{ __html: marked(message) }}
-          />
+          <Body dangerouslySetInnerHTML={{ __html: marked(message) }} />
           <Like postId={id} />
         </TextArea>
       </Inner>
