@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import marked from 'marked';
+import styled from "styled-components";
 
 const converter = new Showdown.Converter({
   tables: true,
@@ -71,6 +72,24 @@ const TodoList = () => {
     return null;
   }
 
+  const Form = styled.form`
+    margin-top: 30px;
+    text-align: right;
+  `;
+
+  const Input = styled.input`
+    padding: 15px 70px;
+    background: pink;
+    transition: opacity 0.6s;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  `;
+
   return (
     <>
       <ul>
@@ -85,14 +104,13 @@ const TodoList = () => {
             />
           ))}
       </ul>
-      <form className="mt-12 text-right" onSubmit={e => handleOnSubmit(e)}>
-        <input
-          className="py-2 px-24 bg-red-200 hover:opacity-70 transition-opacity cursor-pointer"
+      <Form onSubmit={e => handleOnSubmit(e)}>
+        <Input
           type="submit"
           value="投稿"
           onChange={e => handleOnSubmit(e)}
         />
-      </form>
+      </Form>
       <ReactMde
         value={text}
         onChange={setText}

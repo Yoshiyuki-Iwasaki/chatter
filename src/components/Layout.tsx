@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const Layout = ({ children }) => {
   const Main = styled.div`
-    margin: 120px auto 0;
   `
   const Inner = styled.div`
     display: flex;
@@ -13,11 +12,11 @@ const Layout = ({ children }) => {
   `
   const SidebarArea = styled.div`
     background: rgba(243, 244, 246, 0.8);
-    width: calc(100% / 6);
+    width: calc(100% / 5);
   `;
   const ChatArea = styled.div`
     margin: 0 20px;
-    width: calc(100% - (100% / 6));
+    width: calc(100% - (100% / 5));
   `;
   return (
     <>

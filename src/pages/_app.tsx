@@ -1,9 +1,6 @@
 import App from "next/app";
 import type { AppProps, AppContext } from "next/app";
-
 import basicAuthCheck from "../components/basicAuthCheck";
-
-
 import "../../styles/globals.css";
 import "react-mde/lib/styles/css/react-mde-all.css";
 function MyApp({ Component, pageProps }) {
