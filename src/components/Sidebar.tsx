@@ -36,7 +36,7 @@ const Sidebar = () => {
 
   const IconArea = styled.figure`
     margin-right: 10px;
-    width: calc(100% / 5);
+    width: 40px;
   `;
 
   const Icon = styled.img`
@@ -45,9 +45,10 @@ const Sidebar = () => {
   `;
 
   const Text = styled.p`
-    width: calc(100% - (100% / 5));
+    width: calc(100% - 40px);
     display: block;
     font-size: 14px;
+    color: gray;
     font-weight: 400;
   `;
 
@@ -67,7 +68,7 @@ const Sidebar = () => {
             </ListItem>
           ))}
       </ul>
-      <Title marginTop="20px">グループリスト</Title>
+      <Title>グループリスト</Title>
       <ul>
         <li>
           <ListInner>
