@@ -20,13 +20,27 @@ const uiConfig = {
 const Auth = () => {
 
   const Title = styled.h2`
+    margin-bottom: 20px;
     text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+  `;
+  const Block = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   `;
 
   return (
     <>
-      <Title>Please sign-in:</Title>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <Block>
+        <Title>Please sign-in:</Title>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      </Block>
     </>
   );
 };
