@@ -32,6 +32,11 @@ const Sidebar = () => {
     padding: 15px;
     display: flex;
     align-items: center;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
   `;
 
   const IconArea = styled.figure`

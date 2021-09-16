@@ -33,6 +33,11 @@ const Header = () => {
     font-weight: 700;
     font-size: 28px;
     letter-spacing: 0.025em;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
   `;
   const LeftArea = styled.div`
     display: flex;
@@ -40,6 +45,7 @@ const Header = () => {
     align-items: center;
   `;
   const Text = styled.span`
+    cursor: pointer;
     font-size: 15px;
     color: gray;
     letter-spacing: 0.025em;
@@ -55,7 +61,20 @@ const Header = () => {
     opacity: 0;
     visibility: hidden;
     transition: all 0.6s;
-    width: 200px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      right: 25px;
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid gray;
+      border-right: 1px solid gray;
+      background: gray;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
 
     ${Hover}:hover & {
       opacity: 1;
@@ -63,25 +82,35 @@ const Header = () => {
     }
   `;
   const ListItem = styled.li`
-    padding: 20px 10px;
     background: gray;
   `;
   const ListLink = styled.a`
+    padding: 15px 0;
     display: inline-block;
-    width: 100%;
-    height: 100%;
+    border-bottom: 1px solid #fff;
+    width: 200px;
     font-size: 13px;
     color: #fff;
     font-weight: 700;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity:.6;
+    }
   `;
   const Button = styled.a`
+    padding: 15px 0;
     display: inline-block;
-    width: 100%;
-    height: 100%;
     cursor: pointer;
+    width: 200px;
     font-size: 13px;
     color: #fff;
     font-weight: 700;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
   `;
   return (
     <Header>
@@ -98,7 +127,7 @@ const Header = () => {
                 <Text>{user.displayName}</Text>
                 <List>
                   <ListItem>
-                    <ListLink href={`/user${user.uid}`}>
+                    <ListLink href={`/user/${user.uid}`}>
                       プロフィールを見る
                     </ListLink>
                   </ListItem>
