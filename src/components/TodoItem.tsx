@@ -40,6 +40,11 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   const IconArea = styled.a`
     width: 32px;
     margin-right: 10px;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
   `;
 
   const Icon = styled.img`
@@ -62,6 +67,11 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
     font-size: 15px;
     color: gray;
     font-weight: 700;
+    transition: opacity 0.6s;
+
+    &:hover {
+      opacity: 0.6;
+    }
   `;
   const Date = styled.p`
     margin-left: 20px;
