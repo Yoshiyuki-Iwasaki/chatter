@@ -54,10 +54,22 @@ const Header = () => {
   const Hover = styled.div`
     position: relative;
   `;
+  const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+  `;
+  const Icon = styled.figure`
+    margin-right: 10px;
+    width: 40px;
+  `;
+  const IconImage = styled.img`
+    width: 100%;
+    border-radius: 50%;
+  `;
   const List = styled.ul`
     position: absolute;
-    top: 25px;
-    right: 0;
+    top: 50px;
+    right: 20px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.6s;
@@ -124,7 +136,12 @@ const Header = () => {
           <>
             <LeftArea>
               <Hover>
-                <Text>{user.displayName}</Text>
+                <Wrapper>
+                  <Icon>
+                    <IconImage src={user.photoURL} />
+                  </Icon>
+                  <Text>{user.displayName}</Text>
+                </Wrapper>
                 <List>
                   <ListItem>
                     <ListLink href={`/user/${user.uid}`}>

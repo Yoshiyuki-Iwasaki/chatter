@@ -17,10 +17,12 @@ const Layout = ({ children }) => {
     return null;
   }
   const Main = styled.div`
-  `
+    height: calc(100vh - 58px);
+  `;
   const Inner = styled.div`
     display: flex;
     width: 100%;
+    height: 100%;
   `
   const SidebarArea = styled.div`
     background: rgba(243, 244, 246, 0.8);
