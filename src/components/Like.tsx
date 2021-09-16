@@ -78,27 +78,35 @@ const Like = ({ postId }) => {
     setDone(false);
   };
 
-  const Button = styled.button`
+  const Wrapper = styled.div`
     margin-top: 20px;
-    font-size: 14px;
-    color: gray;
+    display: flex;
+    align-items: center;
+  `;
+
+  const Button = styled.figure`
+    width: 25px;
   `;
 
   const LikeCount = styled.button`
-    margin-left: 20px;
+    margin-left: 5px;
     font-size: 14px;
     color: gray;
   `;
 
   return (
-    <>
+    <Wrapper>
       {!done ? (
-        <Button onClick={clickLikeButton}>いいね</Button>
+        <Button onClick={clickLikeButton}>
+          <img src={`image/icon_like.png`} alt="" />
+        </Button>
       ) : (
-        <Button onClick={clickRemoveLikeButton}>いいね済み</Button>
+        <Button onClick={clickRemoveLikeButton}>
+          <img src={`image/icon_liked.png`} alt="" />
+        </Button>
       )}
       <LikeCount>{likeCount}</LikeCount>
-    </>
+    </Wrapper>
   );
 };
 
