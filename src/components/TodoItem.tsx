@@ -29,35 +29,32 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   }
 
   const List = styled.li`
-    margin-top: 25px;
-    display: flex;
-    justify-content: ${userId === user.uid ? "flex-end" : "flex-start"};
   `;
 
   const Inner = styled.div`
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
-    border: 1px solid gray;
-    width: 35%;
+    border-bottom: 1px solid rgb(235, 239, 244);
   `;
 
   const IconArea = styled.a`
-    width: calc(100% / 5);
-    margin-right: 20px;
+    width: 32px;
+    margin-right: 10px;
   `;
 
   const Icon = styled.img`
     width: 100%;
     border-radius: 50%;
+    border: 1px solid rgb(235, 239, 244);
   `;
 
   const TextArea = styled.div`
-    width: calc(100% - (100% / 5));
+    padding-top: 8px;
+    width: calc(100% - 32px);
   `;
   const TextAreaInner = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
   `;
   const Title = styled.h4`
   `;
@@ -67,6 +64,7 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
     font-weight: 700;
   `;
   const Date = styled.p`
+    margin-left: 20px;
     font-size: 12px;
     color: gray;
   `;
@@ -74,7 +72,7 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
     margin-top: 20px;
 
     > p {
-      font-size: 15px;
+      font-size: 14px;
       color: gray;
     }
   `;

@@ -40,7 +40,7 @@ const Header = () => {
     align-items: center;
   `;
   const Button = styled.button`
-    margin-left: 15px;
+    margin-left: 25px;
     padding: 15px;
     background: gray;
     color: #fff;
@@ -48,6 +48,7 @@ const Header = () => {
   `
   const Text = styled.p`
     font-size: 15px;
+    color: gray;
     letter-spacing: 0.025em;
     font-weight: 700;
   `;
