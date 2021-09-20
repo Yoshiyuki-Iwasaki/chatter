@@ -86,6 +86,7 @@ const Like = ({ postId }) => {
 
   const Button = styled.figure`
     width: 25px;
+    z-index: 100;
   `;
 
   const LikeCount = styled.button`

@@ -1,6 +1,7 @@
 import firebase from "../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Sidebar = () => {
   const db = firebase.firestore();
@@ -24,6 +25,8 @@ const Sidebar = () => {
     font-weight: 700;
   `;
 
+  const List = styled.ul`
+  `;
   const ListItem = styled.li`
     border-bottom: 1px solid gray;
   `;
@@ -32,6 +35,7 @@ const Sidebar = () => {
     padding: 15px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     transition: opacity 0.6s;
 
     &:hover {
@@ -60,19 +64,24 @@ const Sidebar = () => {
   return (
     <>
       <Title>ユーザーリスト</Title>
-      <ul>
+      <List>
         {usersList &&
           usersList.docs.map((doc, index) => (
             <ListItem key={index}>
-              <ListInner href={`/user/${doc.data().uid}`}>
-                <IconArea>
-                  <Icon src={doc.data().photoURL} />
-                </IconArea>
-                <Text>{doc.data().displayName}</Text>
-              </ListInner>
+              <Link
+                href={`/user/${doc.data().uid}`}
+                as={`/user/${doc.data().uid}`}
+              >
+                <ListInner>
+                  <IconArea>
+                    <Icon src={doc.data().photoURL} />
+                  </IconArea>
+                  <Text>{doc.data().displayName}</Text>
+                </ListInner>
+              </Link>
             </ListItem>
           ))}
-      </ul>
+      </List>
       <Title>グループリスト</Title>
       <ul>
         <li>

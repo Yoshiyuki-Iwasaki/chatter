@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const Header = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -20,6 +21,9 @@ const Header = () => {
     background: rgba(243, 244, 246, 0.8);
   `;
   const Inner = styled.div`
+    @media screen and (max-width:768px) {
+
+    }
     margin: 0 auto;
     padding: 15px 30px;
     text-align: center;
@@ -29,11 +33,12 @@ const Header = () => {
   `;
   const Title = styled.div`
   `;
-  const Link = styled.a`
-    font-weight: 700;
-    font-size: 28px;
-    letter-spacing: 0.025em;
+  const Logo = styled.a`
     transition: opacity 0.6s;
+    cursor: pointer;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
 
     &:hover {
       opacity: 0.6;
@@ -101,13 +106,14 @@ const Header = () => {
     display: inline-block;
     border-bottom: 1px solid #fff;
     width: 200px;
+    transition: opacity 0.6s;
+    cursor: pointer;
     font-size: 13px;
     color: #fff;
     font-weight: 700;
-    transition: opacity 0.6s;
 
     &:hover {
-      opacity:.6;
+      opacity: 0.6;
     }
   `;
   const Button = styled.a`
@@ -128,7 +134,9 @@ const Header = () => {
     <Header>
       <Inner>
         <Title>
-          <Link href="/">chatter</Link>
+          <Link href="/" as="/">
+            <Logo>chatter</Logo>
+          </Link>
         </Title>
         {!user ? (
           ""
@@ -144,9 +152,9 @@ const Header = () => {
                 </Wrapper>
                 <List>
                   <ListItem>
-                    <ListLink href={`/user/${user.uid}`}>
-                      プロフィールを見る
-                    </ListLink>
+                    <Link href={`/user/${user.uid}`} as={`/user/${user.uid}`}>
+                      <ListLink>プロフィールを見る</ListLink>
+                    </Link>
                   </ListItem>
                   <ListItem>
                     <Button onClick={() => logout()}>ログアウト</Button>
