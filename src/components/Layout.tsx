@@ -1,4 +1,4 @@
-import React from 'react'
+import Meta from "./meta";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Auth from "./Auth";
@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
     display: flex;
     width: 100%;
     height: 100%;
-  `
+  `;
   const SidebarArea = styled.div`
     background: rgba(243, 244, 246, 0.8);
     width: calc(100% / 5);
@@ -35,18 +35,21 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
+      <Meta title="Top" description="This is Top page." />
       <Main>
-          {!user ? <Auth /> : (
-            <Inner>
-              <SidebarArea>
-                <Sidebar />
-              </SidebarArea>
-              <ChatArea>{children}</ChatArea>
-            </Inner>
-          )}
+        {!user ? (
+          <Auth />
+        ) : (
+          <Inner>
+            <SidebarArea>
+              <Sidebar />
+            </SidebarArea>
+            <ChatArea>{children}</ChatArea>
+          </Inner>
+        )}
       </Main>
     </>
   );
-}
+};
 
-export default Layout
+export default Layout;
