@@ -1,7 +1,7 @@
-import firebase from "../../firebase/clientApp";
+import firebase from "../../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import React, { useState, useEffect } from "react";
-import TodoItem from "./TodoItem";
+import TodoItem from "./ChatItem";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import marked from 'marked';
@@ -21,7 +21,7 @@ interface Todo {
   createdAt: string;
 }
 
-const TodoList = () => {
+const ChatList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const convertJST = new Date();
@@ -38,21 +38,21 @@ const TodoList = () => {
 
   const asyncFunction = async () => {
     firebase
-    .firestore()
-    .collectionGroup("posts")
-    .get()
-    .then(snapshot => {
-      const list = [];
-      snapshot.forEach(doc => {
-        list.push(doc.data().id);
+      .firestore()
+      .collectionGroup("posts")
+      .get()
+      .then(snapshot => {
+        const list = [];
+        snapshot.forEach(doc => {
+          list.push(doc.data().id);
+        });
+        return Promise.all(list);
       });
-      return Promise.all(list);
-    });
-  }
+  };
 
   useEffect(() => {
     asyncFunction();
-  },[])
+  }, []);
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -105,11 +105,7 @@ const TodoList = () => {
           ))}
       </ul>
       <Form onSubmit={e => handleOnSubmit(e)}>
-        <Input
-          type="submit"
-          value="投稿"
-          onChange={e => handleOnSubmit(e)}
-        />
+        <Input type="submit" value="投稿" onChange={e => handleOnSubmit(e)} />
       </Form>
       <ReactMde
         value={text}
@@ -122,4 +118,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default ChatList;

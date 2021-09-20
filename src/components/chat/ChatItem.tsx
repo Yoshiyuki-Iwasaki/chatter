@@ -6,6 +6,7 @@ import marked from "marked";
 import Like from "./Like";
 import styled from "styled-components";
 import Link from "next/link";
+
 interface Props {
   key: number;
   id: number;
@@ -14,7 +15,7 @@ interface Props {
   createdAt: string;
 }
 
-const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
+const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
   const [user, userLoading, userError] = useAuthState(firebase.auth());
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
@@ -118,4 +119,4 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   );
 };
 
-export default TodoItem;
+export default ChatItem;
