@@ -16,16 +16,15 @@ interface Props {
 }
 
 const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
-  const [user, userLoading, userError] = useAuthState(firebase.auth());
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
 
-  if (loading || userLoading) {
+  if (loading) {
     return <h6>Loading...</h6>;
   }
 
-  if (error || userError) {
+  if (error) {
     return null;
   }
 

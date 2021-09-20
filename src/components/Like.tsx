@@ -99,11 +99,11 @@ const Like = ({ postId }) => {
     <Wrapper>
       {!done ? (
         <Button onClick={clickLikeButton}>
-          <img src={`image/icon_like.png`} alt="" />
+          <img src={`/image/icon_like.png`} alt="" />
         </Button>
       ) : (
         <Button onClick={clickRemoveLikeButton}>
-          <img src={`image/icon_liked.png`} alt="" />
+          <img src={`/image/icon_liked.png`} alt="" />
         </Button>
       )}
       <LikeCount>{likeCount}</LikeCount>
