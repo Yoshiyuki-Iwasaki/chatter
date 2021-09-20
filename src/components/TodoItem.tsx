@@ -5,7 +5,7 @@ import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "./Like";
 import styled from "styled-components";
-
+import Link from "next/link";
 interface Props {
   key: number;
   id: number;
@@ -90,15 +90,23 @@ const TodoItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   return (
     <List key={key}>
       <Inner>
-        <IconArea href={`/user/${value.data().uid}`}>
-          <Icon src={value.data().photoURL} />
-        </IconArea>
+        <Link
+          href={`/user/${value.data().uid}`}
+          as={`/user/${value.data().uid}`}
+        >
+          <IconArea>
+            <Icon src={value.data().photoURL} />
+          </IconArea>
+        </Link>
         <TextArea>
           <TextAreaInner>
             <Title>
-              <TitleLink href={`/user/${value.data().uid}`}>
-                {value.data().displayName}
-              </TitleLink>
+              <Link
+                href={`/user/${value.data().uid}`}
+                as={`/user/${value.data().uid}`}
+              >
+                <TitleLink>{value.data().displayName}</TitleLink>
+              </Link>
             </Title>
             <Date>{createdAt}</Date>
           </TextAreaInner>
