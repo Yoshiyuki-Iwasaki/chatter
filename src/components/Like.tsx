@@ -3,14 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
 
-interface Like {
-  id: number;
+interface Props {
   postId: string;
-  userId: string;
-  createdAt: string;
 }
 
-const Like = ({ postId }) => {
+const Like = ({ postId }: Props) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [done, setDone] = useState(false);

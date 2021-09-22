@@ -138,9 +138,7 @@ const Header = () => {
             <Logo>chatter</Logo>
           </Link>
         </Title>
-        {!user ? (
-          ""
-        ) : (
+        {user && (
           <>
             <LeftArea>
               <Hover>

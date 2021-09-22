@@ -7,20 +7,6 @@ import * as Showdown from "showdown";
 import marked from 'marked';
 import styled from "styled-components";
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-});
-
-interface Todo {
-  id: number;
-  message: string;
-  userId: any;
-  createdAt: string;
-}
-
 const ChatList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
