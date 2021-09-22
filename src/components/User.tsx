@@ -4,7 +4,8 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
-const User = ({ todo }) => {
+
+const User = ({ todo }: any) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const [user, userLoading, userError] = useAuthState(firebase.auth());
@@ -15,7 +16,15 @@ const User = ({ todo }) => {
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
-  const handleOnSubmit = (e) => {
+  if (loading || userLoading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error || userError) {
+    return null;
+  }
+
+  const handleOnSubmit = e => {
     e.preventDefault();
     if (!text) return;
     db.collection("users")
@@ -29,7 +38,7 @@ const User = ({ todo }) => {
       .catch(error => {
         console.error("Error writing document: ", error);
       });
-    setText('');
+    setText("");
   };
 
   const clickLikeButton = async () => {

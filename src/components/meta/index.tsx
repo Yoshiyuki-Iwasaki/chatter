@@ -1,6 +1,14 @@
 import Head from 'next/head';
 
-const Meta = ({ title = 'Photo Application', description = 'This is Photo Application!!!!' }) => {
+interface Props {
+  title: string;
+  description: string;
+}
+
+const Meta = ({
+  title = "Photo Application",
+  description = "This is Photo Application!!!!",
+}: Props) => {
   return (
     <Head>
       <title>{title}</title>

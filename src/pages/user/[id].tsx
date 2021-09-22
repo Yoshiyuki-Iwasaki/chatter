@@ -3,8 +3,7 @@ import firebase from "../../../firebase/clientApp";
 import User from "../../components/User";
 import Layout from "../../components/Layout";
 
-const UserDetail = ({ todo }) => {
-
+const UserDetail = ({ todo } :any) => {
   return (
     <Layout>
       <User todo={todo} />
