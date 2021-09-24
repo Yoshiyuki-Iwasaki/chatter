@@ -1,4 +1,4 @@
-import firebase from "../../firebase/clientApp";
+import firebase from "../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 import Link from "next/link";

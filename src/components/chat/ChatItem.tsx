@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "../../../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "../Like";
 import styled from "styled-components";
