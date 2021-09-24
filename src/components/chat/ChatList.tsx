@@ -1,4 +1,4 @@
-import firebase from "../../../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import React, { useState, useEffect } from "react";
 import TodoItem from "./ChatItem";

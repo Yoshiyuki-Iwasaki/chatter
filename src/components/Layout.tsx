@@ -2,7 +2,7 @@ import Meta from "./meta";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Auth from "./Auth";
-import firebase from "../../firebase/clientApp";
+import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
