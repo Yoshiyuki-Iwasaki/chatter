@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../firebase/clientApp";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
+interface Props {
+  displayName: string;
+  photoURL: string;
+  uid: string;
+  description: string;
+}
 
 const IconArea = styled.figure`
   margin: 20px auto 0;
@@ -22,6 +30,20 @@ const Title = styled.h1`
   font-size: 20px;
   font-weight: 700;
 `;
+
+const DmButtonWrapper = styled.div`
+  margin-top: 20px;
+  text-align: center;
+`;
+
+const DmButton = styled.button`
+  padding: 10px;
+  background: #333;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+`;
+
 const Description = styled.p`
   margin-top: 10px;
   text-align: center;
@@ -38,22 +60,68 @@ const InputButton = styled.input`
   padding: 5px;
 `;
 
-const User = ({ todo }: any) => {
+const User = ({ displayName, photoURL, uid, description }: Props) => {
   const db = firebase.firestore();
+  const router = useRouter();
+  const [data, setData] = useState<boolean>(false);
+  const [data02, setData02] = useState<boolean>(false);
   const [text, setText] = useState("");
   const [user, userLoading, userError] = useAuthState(firebase.auth());
-  const [value, loading, error] = useDocument(
-    firebase.firestore().doc(`users/${todo.userId}`)
-  );
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
+  const [groupe, groupeLoading, groupeError] = useCollection(
+    db.collection("groupe").where("users", "==", [user.uid, uid]),
+    {}
+  );
+  const [groupe02, groupe02Loading, groupe02Error] = useCollection(
+    db.collection("groupe").where("users", "==", [uid, user.uid]),
+    {}
+  );
 
-  if (loading || userLoading) {
+  useEffect(() => {
+    (async (): Promise<any> => {
+      await db.collection("groupe").onSnapshot((snapshot: any) => {
+        snapshot.docs.map(doc => {
+          doc.data().users.map(doc => {
+            if (doc == user.uid) {
+              setData(true);
+            }
+            if (doc == uid) {
+              setData02(true);
+            }
+          });
+        });
+      });
+    })();
+  }, []);
+
+  const handleDM = async (
+    e: React.MouseEvent<HTMLInputElement>
+  ): Promise<any> => {
+    e.preventDefault();
+
+    if (!data && !data02) {
+      await db.collection("groupe").add({
+        id: new Date().getTime(),
+        users: [user.uid, uid],
+        createdAt: updatedTime,
+      });
+    }
+    groupe &&
+      groupe.docs.map((doc, index) =>
+        router.push(`/groupe/${doc.data().id}`, `/groupe/${doc.data().id}`)
+      );
+    groupe02 &&
+      groupe02.docs.map((doc, index) =>
+        router.push(`/groupe/${doc.data().id}`, `/groupe/${doc.data().id}`)
+      );
+  };
+
+  if (groupeLoading || groupe02Loading || userLoading) {
     return <h6>Loading...</h6>;
   }
-
-  if (error || userError) {
+  if (groupeError || groupe02Error|| userError ) {
     return null;
   }
 
@@ -61,7 +129,7 @@ const User = ({ todo }: any) => {
     e.preventDefault();
     if (!text) return;
     db.collection("users")
-      .doc(todo.uid)
+      .doc(uid)
       .update({
         description: text,
       })
@@ -74,24 +142,18 @@ const User = ({ todo }: any) => {
     setText("");
   };
 
-  const clickLikeButton = async () => {
-    await db.collection("groupe").add({
-      id: new Date().getTime(),
-      users: [user.uid, value.data().uid],
-      createdAt: updatedTime,
-    });
-  };
-
   return (
     <>
       <IconArea>
-        <Icon src={todo.photoURL} />
+        <Icon src={photoURL} />
       </IconArea>
-      <Title>{todo.displayName}</Title>
-      <a href="#" onClick={clickLikeButton}>
-        {todo.displayName}とプライベートチャットをする
-      </a>
-      {todo.description && <Description>{todo.description}</Description>}
+      <Title>{displayName}</Title>
+      <DmButtonWrapper>
+        <DmButton onClick={handleDM}>
+          {displayName}とプライベートチャットをする
+        </DmButton>
+      </DmButtonWrapper>
+      {description && <Description>{description}</Description>}
       <Form onSubmit={e => handleOnSubmit(e)}>
         <InputField
           type="text"

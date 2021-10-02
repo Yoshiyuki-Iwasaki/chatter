@@ -1,9 +1,9 @@
+import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
 import React, { useState, useEffect } from "react";
-import TodoItem from "./ChatItem";
+import GroupeItem from "./GroupeItem";
 import ReactMde from "react-mde";
-import * as Showdown from "showdown";
-import marked from 'marked';
+import marked from "marked";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -24,7 +24,7 @@ const Input = styled.input`
   }
 `;
 
-const ChatList = ({ todolists }) => {
+const GroupeList = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const convertJST = new Date();
@@ -33,11 +33,15 @@ const ChatList = ({ todolists }) => {
   const [selectedTab, setSelectedTab] = React.useState<"write" | "preview">(
     "write"
   );
+  const [data, loading, error] = useCollection(
+    db.collection("chatList").where("groupeId", "==", id),
+    {}
+  );
 
   const asyncFunction = async () => {
     firebase
       .firestore()
-      .collectionGroup("posts")
+      .collectionGroup("chatList")
       .get()
       .then(snapshot => {
         const list = [];
@@ -59,17 +63,26 @@ const ChatList = ({ todolists }) => {
       id: new Date().getTime(),
       message: text,
       userId: firebase.auth().currentUser.uid,
+      groupeId: id,
       createdAt: updatedTime,
     });
     setText("");
   };
 
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error) {
+    return null;
+  }
+
   return (
     <>
       <ul>
-        {todolists &&
-          todolists.docs.map((doc, index) => (
-            <TodoItem
+        {data &&
+          data.docs.map((doc, index) => (
+            <GroupeItem
               key={index}
               id={doc.data().id}
               message={doc.data().message}
@@ -92,4 +105,4 @@ const ChatList = ({ todolists }) => {
   );
 };
 
-export default ChatList;
+export default GroupeList;
