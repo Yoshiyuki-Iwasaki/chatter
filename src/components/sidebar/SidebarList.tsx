@@ -1,7 +1,7 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
 import React, { useState, useEffect } from "react";
-import GroupeItem from "./GroupeItem";
+import GroupeItem from "./SidebarItem";
 import ReactMde from "react-mde";
 import marked from "marked";
 import styled from "styled-components";

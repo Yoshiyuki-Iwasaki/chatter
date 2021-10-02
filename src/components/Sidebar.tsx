@@ -46,6 +46,11 @@ const Text = styled.p`
   color: gray;
   font-weight: 400;
 `;
+const GroupeList = styled.ul`
+
+`;
+const GroupeListItem = styled.li`
+`;
 
 const Sidebar = () => {
   const db = firebase.firestore();
@@ -53,10 +58,14 @@ const Sidebar = () => {
     db.collection("users"),
     {}
   );
-  if (loading) {
+  const [groupe, groupeLoading, groupeError] = useCollection(
+    db.collection("groupe"),
+    {}
+  );
+  if (loading || groupeLoading) {
     return <h6>Loading...</h6>;
   }
-  if (error) {
+  if (error || groupeError) {
     return null;
   }
 
@@ -82,23 +91,22 @@ const Sidebar = () => {
           ))}
       </List>
       <Title>グループリスト</Title>
-      <ul>
-        <li>
-          <ListInner>
-            <Text href="">グループ</Text>
-          </ListInner>
-        </li>
-        <li>
-          <ListInner>
-            <Text href="">グループ</Text>
-          </ListInner>
-        </li>
-        <li>
-          <ListInner>
-            <Text href="">グループ</Text>
-          </ListInner>
-        </li>
-      </ul>
+      <GroupeList>
+        <GroupeListItem>
+          {groupe &&
+            groupe.docs.map((doc, index) => (
+              <Link
+                key={index}
+                href={`/groupe/${doc.data().id}`}
+                as={`/groupe/${doc.data().id}`}
+              >
+                <ListInner>
+                  <Text href="">グループ</Text>
+                </ListInner>
+              </Link>
+            ))}
+        </GroupeListItem>
+      </GroupeList>
     </>
   );
 };
