@@ -6,6 +6,23 @@ import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
+const Main = styled.div`
+  height: calc(100vh - 58px);
+`;
+const Inner = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+const SidebarArea = styled.div`
+  background: rgba(243, 244, 246, 0.8);
+  width: calc(100% / 5);
+`;
+const ChatArea = styled.div`
+  margin: 0 20px;
+  width: calc(100% - (100% / 5));
+`;
+
 const Layout = ({ children }: any) => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
@@ -16,22 +33,6 @@ const Layout = ({ children }: any) => {
   if (error) {
     return null;
   }
-  const Main = styled.div`
-    height: calc(100vh - 58px);
-  `;
-  const Inner = styled.div`
-    display: flex;
-    width: 100%;
-    height: 100%;
-  `;
-  const SidebarArea = styled.div`
-    background: rgba(243, 244, 246, 0.8);
-    width: calc(100% / 5);
-  `;
-  const ChatArea = styled.div`
-    margin: 0 20px;
-    width: calc(100% - (100% / 5));
-  `;
   return (
     <>
       <Header />

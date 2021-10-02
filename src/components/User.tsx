@@ -5,6 +5,39 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
 
+const IconArea = styled.figure`
+  margin: 20px auto 0;
+  width: 150px;
+`;
+
+const Icon = styled.img`
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 50%;
+`;
+
+const Title = styled.h1`
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+`;
+const Description = styled.p`
+  margin-top: 10px;
+  text-align: center;
+`;
+const Form = styled.form`
+  margin-top: 10px;
+  text-align: center;
+`;
+const InputField = styled.input`
+  border: 1px solid gray;
+`;
+const InputButton = styled.input`
+  margin-left: 10px;
+  padding: 5px;
+`;
+
 const User = ({ todo }: any) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
@@ -48,39 +81,6 @@ const User = ({ todo }: any) => {
       createdAt: updatedTime,
     });
   };
-
-  const IconArea = styled.figure`
-    margin: 20px auto 0;
-    width: 150px;
-  `;
-
-  const Icon = styled.img`
-    width: 100%;
-    border: 1px solid gray;
-    border-radius: 50%;
-  `;
-
-  const Title = styled.h1`
-    margin-top: 20px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-  `;
-  const Description = styled.p`
-    margin-top: 10px;
-    text-align: center;
-  `;
-  const Form = styled.form`
-    margin-top: 10px;
-    text-align: center;
-  `;
-  const InputField = styled.input`
-    border: 1px solid gray;
-  `;
-  const InputButton = styled.input`
-    margin-left: 10px;
-    padding: 5px;
-  `;
 
   return (
     <>
