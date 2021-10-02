@@ -36,6 +36,12 @@ const LeftArea = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const Form = styled.form`
+  margin-right: 20px;
+`;
+const Input = styled.input`
+  background: #fff;
+`;
 const Text = styled.span`
   cursor: pointer;
   font-size: 15px;
@@ -141,6 +147,9 @@ const Header = () => {
         {user && (
           <>
             <LeftArea>
+              <Form action="">
+                <Input type="text" />
+              </Form>
               <Hover>
                 <Wrapper>
                   <Icon>
