@@ -4,8 +4,25 @@ import firebase from "../firebase/clientApp";
 import styled from "styled-components";
 
 interface Props {
-  postId: string;
+  postId: number;
 }
+
+const Wrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const Button = styled.figure`
+  width: 25px;
+  z-index: 100;
+`;
+
+const LikeCount = styled.button`
+  margin-left: 5px;
+  font-size: 14px;
+  color: gray;
+`;
 
 const Like = ({ postId }: Props) => {
   const db = firebase.firestore();
@@ -74,23 +91,6 @@ const Like = ({ postId }: Props) => {
     });
     setDone(false);
   };
-
-  const Wrapper = styled.div`
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-  `;
-
-  const Button = styled.figure`
-    width: 25px;
-    z-index: 100;
-  `;
-
-  const LikeCount = styled.button`
-    margin-left: 5px;
-    font-size: 14px;
-    color: gray;
-  `;
 
   return (
     <Wrapper>

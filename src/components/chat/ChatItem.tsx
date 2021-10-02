@@ -15,6 +15,63 @@ interface Props {
   createdAt: string;
 }
 
+const List = styled.li``;
+
+const Inner = styled.div`
+  padding: 20px 10px;
+  display: flex;
+  border-bottom: 1px solid rgb(235, 239, 244);
+`;
+
+const IconArea = styled.a`
+  width: 32px;
+  margin-right: 10px;
+  transition: opacity 0.6s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
+const Icon = styled.img`
+  width: 100%;
+  border-radius: 50%;
+  border: 1px solid rgb(235, 239, 244);
+`;
+
+const TextArea = styled.div`
+  padding-top: 8px;
+  width: calc(100% - 32px);
+`;
+const TextAreaInner = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Title = styled.h4``;
+const TitleLink = styled.a`
+  font-size: 15px;
+  color: gray;
+  font-weight: 700;
+  transition: opacity 0.6s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+const Date = styled.p`
+  margin-left: 20px;
+  font-size: 12px;
+  color: gray;
+`;
+const Body = styled.div`
+  margin-top: 20px;
+
+  > p {
+    font-size: 14px;
+    color: gray;
+  }
+`;
+
 const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
@@ -27,65 +84,6 @@ const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   if (error) {
     return null;
   }
-
-  const List = styled.li`
-  `;
-
-  const Inner = styled.div`
-    padding: 20px 10px;
-    display: flex;
-    border-bottom: 1px solid rgb(235, 239, 244);
-  `;
-
-  const IconArea = styled.a`
-    width: 32px;
-    margin-right: 10px;
-    transition: opacity 0.6s;
-
-    &:hover {
-      opacity: 0.6;
-    }
-  `;
-
-  const Icon = styled.img`
-    width: 100%;
-    border-radius: 50%;
-    border: 1px solid rgb(235, 239, 244);
-  `;
-
-  const TextArea = styled.div`
-    padding-top: 8px;
-    width: calc(100% - 32px);
-  `;
-  const TextAreaInner = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-  const Title = styled.h4`
-  `;
-  const TitleLink = styled.a`
-    font-size: 15px;
-    color: gray;
-    font-weight: 700;
-    transition: opacity 0.6s;
-
-    &:hover {
-      opacity: 0.6;
-    }
-  `;
-  const Date = styled.p`
-    margin-left: 20px;
-    font-size: 12px;
-    color: gray;
-  `;
-  const Body = styled.div`
-    margin-top: 20px;
-
-    > p {
-      font-size: 14px;
-      color: gray;
-    }
-  `;
 
   return (
     <List key={key}>

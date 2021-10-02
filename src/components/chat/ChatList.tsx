@@ -7,6 +7,24 @@ import * as Showdown from "showdown";
 import marked from 'marked';
 import styled from "styled-components";
 
+const Form = styled.form`
+  margin-top: 30px;
+  text-align: right;
+`;
+
+const Input = styled.input`
+  padding: 15px 70px;
+  background: pink;
+  transition: opacity 0.6s;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
 const ChatList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
@@ -57,24 +75,6 @@ const ChatList = () => {
   if (todolistsError) {
     return null;
   }
-
-  const Form = styled.form`
-    margin-top: 30px;
-    text-align: right;
-  `;
-
-  const Input = styled.input`
-    padding: 15px 70px;
-    background: pink;
-    transition: opacity 0.6s;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-
-    &:hover {
-      opacity: 0.6;
-    }
-  `;
 
   return (
     <>
