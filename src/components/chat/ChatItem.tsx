@@ -24,8 +24,9 @@ const Inner = styled.div`
 `;
 
 const IconArea = styled.a`
-  width: 32px;
   margin-right: 10px;
+  width: 32px;
+  cursor: pointer;
   transition: opacity 0.6s;
 
   &:hover {
@@ -52,6 +53,7 @@ const TitleLink = styled.a`
   font-size: 15px;
   color: gray;
   font-weight: 700;
+  cursor: pointer;
   transition: opacity 0.6s;
 
   &:hover {
@@ -72,7 +74,7 @@ const Body = styled.div`
   }
 `;
 
-const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement => {
+const ChatItem = ({id, message, userId, createdAt }: Props): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
@@ -86,7 +88,7 @@ const ChatItem = ({key, id, message, userId, createdAt }: Props): ReactElement =
   }
 
   return (
-    <List key={key}>
+    <List>
       <Inner>
         <Link
           href={`/user/${value.data().uid}`}
