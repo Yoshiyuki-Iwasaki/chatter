@@ -23,7 +23,6 @@ const Inner = styled.div`
   }
 `;
 const SidebarArea = styled.div`
-  margin: 50px 20px 0;
   background: rgba(243, 244, 246, 0.8);
   width: calc(100% / 5);
 
