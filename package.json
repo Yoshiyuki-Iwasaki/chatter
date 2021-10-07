@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "eslint-plugin-react-hooks": "^4.2.0",
     "firebase": "^8.10.0",
     "firebase-functions": "^3.15.4",
     "firebaseui": "^5.0.0",
