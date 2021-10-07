@@ -93,6 +93,7 @@ const ChatItem = ({id, message, userId, createdAt }: Props): ReactElement => {
         <Link
           href={`/user/${value.data().uid}`}
           as={`/user/${value.data().uid}`}
+          passHref
         >
           <IconArea>
             <Icon src={value.data().photoURL} />
@@ -104,6 +105,7 @@ const ChatItem = ({id, message, userId, createdAt }: Props): ReactElement => {
               <Link
                 href={`/user/${value.data().uid}`}
                 as={`/user/${value.data().uid}`}
+                passHref
               >
                 <TitleLink>{value.data().displayName}</TitleLink>
               </Link>

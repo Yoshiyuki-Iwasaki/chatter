@@ -140,7 +140,7 @@ const Header = () => {
     <HeaderLayout>
       <Inner>
         <Title>
-          <Link href="/" as="/">
+          <Link href="/" as="/" passHref>
             <Logo>chatter</Logo>
           </Link>
         </Title>
@@ -159,7 +159,11 @@ const Header = () => {
                 </Wrapper>
                 <List>
                   <ListItem>
-                    <Link href={`/user/${user.uid}`} as={`/user/${user.uid}`}>
+                    <Link
+                      href={`/user/${user.uid}`}
+                      as={`/user/${user.uid}`}
+                      passHref
+                    >
                       <ListLink>プロフィールを見る</ListLink>
                     </Link>
                   </ListItem>

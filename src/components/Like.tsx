@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
 import styled from "styled-components";
+import Image from 'next/image'
 
 interface Props {
   postId: number;
@@ -33,6 +34,11 @@ const Like = ({ postId }: Props) => {
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
+  useEffect(() => {
+    handleLike();
+    countLike();
+  }, []);
+
   if (loading) {
     return <h6>Loading...</h6>;
   }
@@ -41,12 +47,7 @@ const Like = ({ postId }: Props) => {
     return null;
   }
 
-  useEffect(() => {
-    handleLike();
-    CountLike();
-  }, []);
-
-  const CountLike = async () => {
+  const countLike = async () => {
     await db
       .collection("likeList")
       .where("postId", "==", postId)
@@ -76,7 +77,7 @@ const Like = ({ postId }: Props) => {
       createdAt: updatedTime,
     });
     handleLike();
-    CountLike();
+    countLike();
   };
 
   const clickRemoveLikeButton = async () => {
@@ -87,7 +88,7 @@ const Like = ({ postId }: Props) => {
       .get();
     likesRef.forEach(postDoc => {
       db.collection("likeList").doc(postDoc.id).delete();
-      CountLike();
+      countLike();
     });
     setDone(false);
   };
@@ -96,11 +97,11 @@ const Like = ({ postId }: Props) => {
     <Wrapper>
       {!done ? (
         <Button onClick={clickLikeButton}>
-          <img src={`/image/icon_like.png`} alt="" />
+          <Image src={`/image/icon_like.png`} alt="" />
         </Button>
       ) : (
         <Button onClick={clickRemoveLikeButton}>
-          <img src={`/image/icon_liked.png`} alt="" />
+          <Image src={`/image/icon_liked.png`} alt="" />
         </Button>
       )}
       <LikeCount>{likeCount}</LikeCount>

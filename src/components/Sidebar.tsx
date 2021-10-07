@@ -79,6 +79,7 @@ const Sidebar = () => {
               <Link
                 href={`/user/${doc.data().uid}`}
                 as={`/user/${doc.data().uid}`}
+                passHref
               >
                 <ListInner>
                   <IconArea>
@@ -99,6 +100,7 @@ const Sidebar = () => {
                 key={index}
                 href={`/groupe/${doc.data().id}`}
                 as={`/groupe/${doc.data().id}`}
+                passHref
               >
                 <ListInner>
                   <Text href="">グループ</Text>
