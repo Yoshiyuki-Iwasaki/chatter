@@ -14,9 +14,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Button = styled.figure`
-  width: 25px;
+const LikeButton = styled.span`
   z-index: 100;
+`;
+
+const LikedButton = styled(LikeButton)`
+  color: #e94709;
 `;
 
 const LikeCount = styled.button`
@@ -96,13 +99,9 @@ const Like = ({ postId }: Props) => {
   return (
     <Wrapper>
       {!done ? (
-        <Button onClick={clickLikeButton}>
-          <Image src={`/image/icon_like.png`} alt="" />
-        </Button>
+        <LikeButton onClick={clickLikeButton}>いいね</LikeButton>
       ) : (
-        <Button onClick={clickRemoveLikeButton}>
-          <Image src={`/image/icon_liked.png`} alt="" />
-        </Button>
+        <LikedButton onClick={clickRemoveLikeButton}>いいね済み</LikedButton>
       )}
       <LikeCount>{likeCount}</LikeCount>
     </Wrapper>
