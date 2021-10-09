@@ -153,7 +153,7 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
           {displayName}とプライベートチャットをする
         </DmButton>
       </DmButtonWrapper>
-      {description && <Description>{description}</Description>}
+      {/* {description && <Description>{description}</Description>}
       <Form onSubmit={e => handleOnSubmit(e)}>
         <InputField
           type="text"
@@ -165,7 +165,7 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
           onClick={e => handleOnSubmit(e)}
           value="投稿"
         />
-      </Form>
+      </Form> */}
     </>
   );
 };

@@ -3,8 +3,12 @@ import styled from "styled-components";
 
 const Button = styled.button`
   padding: 20px;
-  background: #000;
-  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  transform: translate(-50%, -50%);
 `;
 
 const Home = () => {

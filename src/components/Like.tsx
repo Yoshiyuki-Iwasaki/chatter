@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
 import styled from "styled-components";
-import Image from 'next/image'
+
 
 interface Props {
   postId: number;
@@ -42,13 +42,8 @@ const Like = ({ postId }: Props) => {
     countLike();
   }, []);
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-
-  if (error) {
-    return null;
-  }
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
   const countLike = async () => {
     await db

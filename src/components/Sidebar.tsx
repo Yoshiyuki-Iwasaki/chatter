@@ -62,12 +62,8 @@ const Sidebar = () => {
     db.collection("groupe"),
     {}
   );
-  if (loading || groupeLoading) {
-    return <h6>Loading...</h6>;
-  }
-  if (error || groupeError) {
-    return null;
-  }
+  if (loading || groupeLoading) return <h6>Loading...</h6>;
+  if (error || groupeError) return null;
 
   return (
     <>

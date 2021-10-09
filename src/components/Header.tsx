@@ -129,12 +129,9 @@ const Header = () => {
   const logout = () => {
     firebase.auth().signOut();
   }
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-  if (error) {
-    return null;
-  }
+
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
   return (
     <HeaderLayout>

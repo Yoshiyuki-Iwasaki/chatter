@@ -78,13 +78,8 @@ const GroupeItem = ({id, message, userId, createdAt }: Props): ReactElement => {
     firebase.firestore().doc(`users/${userId}`)
   );
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-
-  if (error) {
-    return null;
-  }
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
   return (
     <List>
