@@ -73,18 +73,18 @@ const Body = styled.div`
   }
 `;
 
-const GroupeItem = ({id, message, userId, createdAt }: Props): ReactElement => {
+const GroupeItem: React.FC<Props> = ({
+  id,
+  message,
+  userId,
+  createdAt,
+}): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-
-  if (error) {
-    return null;
-  }
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
   return (
     <List>

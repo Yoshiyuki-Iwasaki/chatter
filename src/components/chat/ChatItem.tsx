@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "../Like";
@@ -74,18 +73,18 @@ const Body = styled.div`
   }
 `;
 
-const ChatItem = ({id, message, userId, createdAt }: Props): ReactElement => {
+const ChatItem: React.FC<Props> = ({
+  id,
+  message,
+  userId,
+  createdAt,
+}): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-
-  if (error) {
-    return null;
-  }
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
   return (
     <List>

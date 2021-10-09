@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../firebase/clientApp";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
@@ -60,7 +59,12 @@ const InputButton = styled.input`
   padding: 5px;
 `;
 
-const User = ({ displayName, photoURL, uid, description }: Props) => {
+const User: React.FC<Props> = ({
+  displayName,
+  photoURL,
+  uid,
+  description,
+}) => {
   const db = firebase.firestore();
   const router = useRouter();
   const [data, setData] = useState<boolean>(false);
@@ -96,6 +100,13 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
     })();
   }, []);
 
+  const checkGroupe = groupe => {
+    groupe &&
+      groupe.docs.map((doc, index) =>
+        router.push(`/groupe/${doc.data().id}`, `/groupe/${doc.data().id}`)
+      );
+  };
+
   const handleDM = async (
     e: React.MouseEvent<HTMLInputElement>
   ): Promise<any> => {
@@ -108,22 +119,13 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
         createdAt: updatedTime,
       });
     }
-    groupe &&
-      groupe.docs.map((doc, index) =>
-        router.push(`/groupe/${doc.data().id}`, `/groupe/${doc.data().id}`)
-      );
-    groupe02 &&
-      groupe02.docs.map((doc, index) =>
-        router.push(`/groupe/${doc.data().id}`, `/groupe/${doc.data().id}`)
-      );
+    checkGroupe(groupe);
+    checkGroupe(groupe02);
   };
 
-  if (groupeLoading || groupe02Loading || userLoading) {
+  if (groupeLoading || groupe02Loading || userLoading)
     return <h6>Loading...</h6>;
-  }
-  if (groupeError || groupe02Error|| userError ) {
-    return null;
-  }
+  if (groupeError || groupe02Error || userError) return null;
 
   const handleOnSubmit = e => {
     e.preventDefault();
@@ -153,7 +155,7 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
           {displayName}とプライベートチャットをする
         </DmButton>
       </DmButtonWrapper>
-      {description && <Description>{description}</Description>}
+      {/* {description && <Description>{description}</Description>}
       <Form onSubmit={e => handleOnSubmit(e)}>
         <InputField
           type="text"
@@ -165,7 +167,7 @@ const User = ({ displayName, photoURL, uid, description }: Props) => {
           onClick={e => handleOnSubmit(e)}
           value="投稿"
         />
-      </Form>
+      </Form> */}
     </>
   );
 };

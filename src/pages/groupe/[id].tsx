@@ -30,7 +30,6 @@ export const getStaticProps = async (context): Promise<any> => {
   const todos = res.docs.map(todo => todo.data());
   const array = todos.find(todo => todo.id == id);
 
-  console.log('array',array)
   return {
     props: {
       todo: array,

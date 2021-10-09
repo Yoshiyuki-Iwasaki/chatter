@@ -39,16 +39,12 @@ const ChatArea = styled.div`
   }
 `;
 
-const Layout = ({ children }: any) => {
+const Layout : React.FC = ({ children }: any) => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
 
-  if (error) {
-    return null;
-  }
   return (
     <>
       <Header />
