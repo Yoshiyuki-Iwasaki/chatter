@@ -2,7 +2,6 @@ import firebase from "../../firebase/clientApp";
 import React, { useState, useEffect } from "react";
 import TodoItem from "./ChatItem";
 import ReactMde from "react-mde";
-import * as Showdown from "showdown";
 import marked from 'marked';
 import styled from "styled-components";
 

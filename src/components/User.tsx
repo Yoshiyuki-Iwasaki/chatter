@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../firebase/clientApp";
-import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
