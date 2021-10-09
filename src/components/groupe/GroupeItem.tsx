@@ -73,7 +73,12 @@ const Body = styled.div`
   }
 `;
 
-const GroupeItem = ({id, message, userId, createdAt }: Props): ReactElement => {
+const GroupeItem: React.FC<Props> = ({
+  id,
+  message,
+  userId,
+  createdAt,
+}): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );

@@ -24,7 +24,7 @@ const Input = styled.input`
   }
 `;
 
-const GroupeList = ({ id }) => {
+const GroupeList: React.FC<any> = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const convertJST = new Date();

@@ -74,7 +74,12 @@ const Body = styled.div`
   }
 `;
 
-const ChatItem = ({id, message, userId, createdAt }: Props): ReactElement => {
+const ChatItem: React.FC<Props> = ({
+  id,
+  message,
+  userId,
+  createdAt,
+}): ReactElement => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );

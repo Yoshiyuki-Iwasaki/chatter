@@ -28,7 +28,7 @@ const LikeCount = styled.button`
   color: gray;
 `;
 
-const Like = ({ postId }: Props) => {
+const Like: React.FC<Props> = ({ postId }: Props) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [done, setDone] = useState(false);

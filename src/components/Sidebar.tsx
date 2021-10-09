@@ -52,12 +52,9 @@ const GroupeList = styled.ul`
 const GroupeListItem = styled.li`
 `;
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const db = firebase.firestore();
-  const [usersList, loading, error] = useCollection(
-    db.collection("users"),
-    {}
-  );
+  const [usersList, loading, error] = useCollection(db.collection("users"), {});
   const [groupe, groupeLoading, groupeError] = useCollection(
     db.collection("groupe"),
     {}

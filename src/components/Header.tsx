@@ -124,11 +124,11 @@ const Button = styled.a`
   }
 `;
 
-const Header = () => {
+const Header: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const logout = () => {
     firebase.auth().signOut();
-  }
+  };
 
   if (loading) return <h6>Loading...</h6>;
   if (error) return null;
@@ -175,6 +175,6 @@ const Header = () => {
       </Inner>
     </HeaderLayout>
   );
-}
+};
 
 export default Header

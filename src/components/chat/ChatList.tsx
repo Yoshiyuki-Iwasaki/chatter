@@ -24,7 +24,7 @@ const Input = styled.input`
   }
 `;
 
-const ChatList = ({ todolists }) => {
+const ChatList: React.FC<any> = ({ todolists }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const convertJST = new Date();

@@ -12,7 +12,6 @@ const clientCredentials = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(clientCredentials);
-}
+if (!firebase.apps.length) firebase.initializeApp(clientCredentials);
+
 export default firebase;
