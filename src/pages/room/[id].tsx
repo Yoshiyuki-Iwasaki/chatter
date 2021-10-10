@@ -1,21 +1,21 @@
-import React from 'react'
-import firebase from "../../firebase/clientApp";
+import RoomList from "../../components/room/RoomList";
 import Layout from "../../components/Layout";
+import firebase from "../../firebase/clientApp";
 
-const UserDetail = ({ todo } :any) => {
+const RoomDetail = ({ todo }: any) => {
   return (
     <Layout>
-      <p>chat部屋</p>
+      <RoomList id={todo.uid} />
     </Layout>
   );
 };
 
-export default UserDetail
+export default RoomDetail;
 
 export const getStaticPaths = async () => {
   const db = firebase.firestore();
   const res = await db.collection("users").get();
-  const paths = res.docs.map(todo => `/user/${todo.data().uid}`);
+  const paths = res.docs.map(todo => `/room/${todo.data().uid}`);
   return { paths, fallback: false };
 };
 

@@ -15,7 +15,6 @@ const Home = () => {
 
   return (
     <Layout>
-      <Button>グループを作成する</Button>
     </Layout>
   );
 }

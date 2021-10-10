@@ -70,8 +70,8 @@ const Sidebar: React.FC = () => {
           usersList.docs.map((doc, index) => (
             <ListItem key={index}>
               <Link
-                href={`/user/${doc.data().uid}`}
-                as={`/user/${doc.data().uid}`}
+                href={`/room/${doc.data().uid}`}
+                as={`/room/${doc.data().uid}`}
                 passHref
               >
                 <ListInner>
