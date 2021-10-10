@@ -1,8 +1,9 @@
+import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
-import React, { useState, useEffect } from "react";
-import TodoItem from "./ChatItem";
+import React, { useState } from "react";
+import GroupeItem from "./RoomItem";
 import ReactMde from "react-mde";
-import marked from 'marked';
+import marked from "marked";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -23,7 +24,7 @@ const Input = styled.input`
   }
 `;
 
-const ChatList: React.FC<any> = ({ todolists }) => {
+const GroupeList: React.FC<any> = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const convertJST = new Date();
@@ -32,24 +33,10 @@ const ChatList: React.FC<any> = ({ todolists }) => {
   const [selectedTab, setSelectedTab] = React.useState<"write" | "preview">(
     "write"
   );
-
-  const asyncFunction = async () => {
-    firebase
-      .firestore()
-      .collectionGroup("posts")
-      .get()
-      .then(snapshot => {
-        const list = [];
-        snapshot.forEach(doc => {
-          list.push(doc.data().id);
-        });
-        return Promise.all(list);
-      });
-  };
-
-  useEffect(() => {
-    asyncFunction();
-  }, []);
+  const [data, loading, error] = useCollection(
+    db.collection("chatList").where("groupeId", "==", id),
+    {}
+  );
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -58,17 +45,21 @@ const ChatList: React.FC<any> = ({ todolists }) => {
       id: new Date().getTime(),
       message: text,
       userId: firebase.auth().currentUser.uid,
+      groupeId: id,
       createdAt: updatedTime,
     });
     setText("");
   };
 
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
+
   return (
     <>
       <ul>
-        {todolists &&
-          todolists.docs.map((doc, index) => (
-            <TodoItem
+        {data &&
+          data.docs.map((doc, index) => (
+            <GroupeItem
               key={index}
               id={doc.data().id}
               message={doc.data().message}
@@ -91,4 +82,4 @@ const ChatList: React.FC<any> = ({ todolists }) => {
   );
 };
 
-export default ChatList;
+export default GroupeList;

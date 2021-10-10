@@ -11,3 +11,17 @@ module.exports = {
     };
   },
 };
+
+// const config = {
+//   async redirects() {
+//     return [
+//       {
+//         source: "/about", // リダイレクト元のURL
+//         destination: "/redirect_page_url", // リダイレクト先のURL
+//         permanent: true, // 永続的なリダイレクトかのフラグ
+//       },
+//     ];
+//   },
+// };
+
+// module.exports = config;
