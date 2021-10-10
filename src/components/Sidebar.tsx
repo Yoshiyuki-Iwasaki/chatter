@@ -84,24 +84,6 @@ const Sidebar: React.FC = () => {
             </ListItem>
           ))}
       </List>
-      <Title>グループリスト</Title>
-      <GroupeList>
-        <GroupeListItem>
-          {groupe &&
-            groupe.docs.map((doc, index) => (
-              <Link
-                key={index}
-                href={`/groupe/${doc.data().id}`}
-                as={`/groupe/${doc.data().id}`}
-                passHref
-              >
-                <ListInner>
-                  <Text href="">グループ</Text>
-                </ListInner>
-              </Link>
-            ))}
-        </GroupeListItem>
-      </GroupeList>
     </>
   );
 };

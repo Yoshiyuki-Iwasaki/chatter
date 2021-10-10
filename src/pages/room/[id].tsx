@@ -1,17 +1,11 @@
 import React from 'react'
 import firebase from "../../firebase/clientApp";
-import User from "../../components/User";
 import Layout from "../../components/Layout";
 
 const UserDetail = ({ todo } :any) => {
   return (
     <Layout>
-      <User
-        displayName={todo.displayName}
-        photoURL={todo.photoURL}
-        uid={todo.uid}
-        description={todo.description}
-      />
+      <p>chat部屋</p>
     </Layout>
   );
 };

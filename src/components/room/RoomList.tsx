@@ -38,24 +38,6 @@ const GroupeList: React.FC<any> = ({ id }) => {
     {}
   );
 
-  const asyncFunction = async () => {
-    firebase
-      .firestore()
-      .collectionGroup("chatList")
-      .get()
-      .then(snapshot => {
-        const list = [];
-        snapshot.forEach(doc => {
-          list.push(doc.data().id);
-        });
-        return Promise.all(list);
-      });
-  };
-
-  useEffect(() => {
-    asyncFunction();
-  }, []);
-
   const handleOnSubmit = async e => {
     e.preventDefault();
     if (!text) return;
