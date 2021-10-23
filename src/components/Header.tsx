@@ -4,6 +4,59 @@ import firebase from "../firebase/clientApp";
 import styled from 'styled-components';
 import Link from 'next/link';
 
+const Header: React.FC = () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+  const logout = () => {
+    firebase.auth().signOut();
+  };
+
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
+
+  return (
+    <HeaderLayout>
+      <Inner>
+        <Title>
+          <Link href="/" as="/" passHref>
+            <Logo>chatter</Logo>
+          </Link>
+        </Title>
+        {user && (
+          <>
+            <LeftArea>
+              <Hover>
+                <Wrapper>
+                  <Icon>
+                    <IconImage src={user.photoURL} />
+                  </Icon>
+                  <Text>{user.displayName}</Text>
+                </Wrapper>
+                <List>
+                  <ListItem>
+                    <Link
+                      href={`/user/${user.uid}`}
+                      as={`/user/${user.uid}`}
+                      passHref
+                    >
+                      <ListLink>プロフィールを見る</ListLink>
+                    </Link>
+                  </ListItem>
+                  <ListItem>
+                    <Button onClick={() => logout()}>ログアウト</Button>
+                  </ListItem>
+                </List>
+              </Hover>
+            </LeftArea>
+          </>
+        )}
+      </Inner>
+    </HeaderLayout>
+  );
+};
+
+export default Header
+
+
 const HeaderLayout = styled.header`
   margin: 0 auto;
   width: 100%;
@@ -35,12 +88,6 @@ const LeftArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-const Form = styled.form`
-  margin-right: 20px;
-`;
-const Input = styled.input`
-  background: #fff;
 `;
 const Text = styled.span`
   cursor: pointer;
@@ -123,58 +170,3 @@ const Button = styled.a`
     opacity: 0.6;
   }
 `;
-
-const Header: React.FC = () => {
-  const [user, loading, error] = useAuthState(firebase.auth());
-  const logout = () => {
-    firebase.auth().signOut();
-  };
-
-  if (loading) return <h6>Loading...</h6>;
-  if (error) return null;
-
-  return (
-    <HeaderLayout>
-      <Inner>
-        <Title>
-          <Link href="/" as="/" passHref>
-            <Logo>chatter</Logo>
-          </Link>
-        </Title>
-        {user && (
-          <>
-            <LeftArea>
-              <Form action="">
-                <Input type="text" />
-              </Form>
-              <Hover>
-                <Wrapper>
-                  <Icon>
-                    <IconImage src={user.photoURL} />
-                  </Icon>
-                  <Text>{user.displayName}</Text>
-                </Wrapper>
-                <List>
-                  <ListItem>
-                    <Link
-                      href={`/user/${user.uid}`}
-                      as={`/user/${user.uid}`}
-                      passHref
-                    >
-                      <ListLink>プロフィールを見る</ListLink>
-                    </Link>
-                  </ListItem>
-                  <ListItem>
-                    <Button onClick={() => logout()}>ログアウト</Button>
-                  </ListItem>
-                </List>
-              </Hover>
-            </LeftArea>
-          </>
-        )}
-      </Inner>
-    </HeaderLayout>
-  );
-};
-
-export default Header
