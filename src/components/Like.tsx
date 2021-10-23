@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
 import styled from "styled-components";
 
-
 interface Props {
   postId: number;
 }
@@ -38,7 +37,7 @@ const Like: React.FC<Props> = ({ postId }: Props) => {
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
   useEffect(() => {
-    handleLike();
+    loadingLike();
     countLike();
   }, []);
 
@@ -47,7 +46,7 @@ const Like: React.FC<Props> = ({ postId }: Props) => {
 
   const countLike = async () => {
     await db
-      .collection("likeList")
+      .collection("like")
       .where("postId", "==", postId)
       .get()
       .then(snap => {
@@ -56,9 +55,9 @@ const Like: React.FC<Props> = ({ postId }: Props) => {
       });
   };
 
-  const handleLike = async () => {
+  const loadingLike = async () => {
     const likesRef = await db
-      .collection("likeList")
+      .collection("like")
       .where("postId", "==", postId)
       .where("userId", "==", user.uid)
       .get();
@@ -68,24 +67,24 @@ const Like: React.FC<Props> = ({ postId }: Props) => {
   };
 
   const clickLikeButton = async () => {
-    await db.collection("likeList").add({
+    await db.collection("like").add({
       id: new Date().getTime(),
       postId: postId,
       userId: user.uid,
       createdAt: updatedTime,
     });
-    handleLike();
+    loadingLike();
     countLike();
   };
 
   const clickRemoveLikeButton = async () => {
     const likesRef = await db
-      .collection("likeList")
+      .collection("like")
       .where("postId", "==", postId)
       .where("userId", "==", user.uid)
       .get();
     likesRef.forEach(postDoc => {
-      db.collection("likeList").doc(postDoc.id).delete();
+      db.collection("like").doc(postDoc.id).delete();
       countLike();
     });
     setDone(false);

@@ -14,6 +14,54 @@ interface Props {
   createdAt: string;
 }
 
+const ChatItem: React.FC<Props> = ({
+  id,
+  message,
+  userId,
+  createdAt,
+}): ReactElement => {
+  const [value, loading, error] = useDocument(
+    firebase.firestore().doc(`users/${userId}`)
+  );
+
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
+
+  return (
+    <List>
+      <Inner>
+        <Link
+          href={`/user/${value.data().uid}`}
+          as={`/user/${value.data().uid}`}
+          passHref
+        >
+          <IconArea>
+            <Icon src={value.data().photoURL} />
+          </IconArea>
+        </Link>
+        <TextArea>
+          <TextAreaInner>
+            <Title>
+              <Link
+                href={`/user/${value.data().uid}`}
+                as={`/user/${value.data().uid}`}
+                passHref
+              >
+                <TitleLink>{value.data().displayName}</TitleLink>
+              </Link>
+            </Title>
+            <Date>{createdAt}</Date>
+          </TextAreaInner>
+          <Body dangerouslySetInnerHTML={{ __html: marked(message) }} />
+          <Like postId={id} />
+        </TextArea>
+      </Inner>
+    </List>
+  );
+};
+
+export default ChatItem;
+
 const List = styled.li``;
 
 const Inner = styled.div`
@@ -72,51 +120,3 @@ const Body = styled.div`
     color: gray;
   }
 `;
-
-const GroupeItem: React.FC<Props> = ({
-  id,
-  message,
-  userId,
-  createdAt,
-}): ReactElement => {
-  const [value, loading, error] = useDocument(
-    firebase.firestore().doc(`users/${userId}`)
-  );
-
-  if (loading) return <h6>Loading...</h6>;
-  if (error) return null;
-
-  return (
-    <List>
-      <Inner>
-        <Link
-          href={`/user/${value.data().uid}`}
-          as={`/user/${value.data().uid}`}
-          passHref
-        >
-          <IconArea>
-            <Icon src={value.data().photoURL} />
-          </IconArea>
-        </Link>
-        <TextArea>
-          <TextAreaInner>
-            <Title>
-              <Link
-                href={`/user/${value.data().uid}`}
-                as={`/user/${value.data().uid}`}
-                passHref
-              >
-                <TitleLink>{value.data().displayName}</TitleLink>
-              </Link>
-            </Title>
-            <Date>{createdAt}</Date>
-          </TextAreaInner>
-          <Body dangerouslySetInnerHTML={{ __html: marked(message) }} />
-          <Like postId={id} />
-        </TextArea>
-      </Inner>
-    </List>
-  );
-};
-
-export default GroupeItem;
