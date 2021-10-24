@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
 import marked from "marked";
-import Like from "../Like";
+import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
 
