@@ -2,10 +2,10 @@ import Head from 'next/head';
 import { Props } from "../declarations/meta";
 
 
-const Meta = ({
+const Meta: React.FC<Props> = ({
   title = "Photo Application",
   description = "This is Photo Application!!!!",
-}: Props) => {
+}) => {
   return (
     <Head>
       <title>{title}</title>
