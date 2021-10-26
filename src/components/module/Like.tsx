@@ -65,7 +65,7 @@ const Like: React.FC<Props> = ({ postId }) => {
       id: new Date().getTime(),
       postId: postId,
       userId: user.uid,
-      createdAt: updatedTime,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     loadingLike();
     countLike();
