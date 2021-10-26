@@ -2,8 +2,9 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
 import ChatItem from "../chat/ChatItem";
 import ChatInput from "./ChatInput";
+import { ChatItemType } from "../declarations/chat";
 
-const ChatList: React.FC<any> = ({ id }) => {
+const ChatList: React.FC<ChatItemType> = ({ id }) => {
   const db = firebase.firestore();
   const [data, loading, error] = useCollection(
     db.collection("mychat").where("userId", "==", id),
@@ -27,7 +28,7 @@ const ChatList: React.FC<any> = ({ id }) => {
             />
           ))}
       </ul>
-      <ChatInput id={id} />
+      <ChatInput />
     </>
   );
 };

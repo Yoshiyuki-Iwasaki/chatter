@@ -2,8 +2,9 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
 import ChatItem from "./ChatItem";
 import ChatInput from "./ChatInput";
+import { ChatItemType } from "../declarations/chat";
 
-const ChatList: React.FC<any> = ({ id }:any) => {
+const ChatList: React.FC<ChatItemType> = ({ id }) => {
   const db = firebase.firestore();
   const [data, loading, error] = useCollection(
     db.collection("chat").doc(id).collection("messages"),

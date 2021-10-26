@@ -5,3 +5,8 @@ export type Props = {
   userId: string;
   createdAt: any;
 }
+
+
+export type ChatItemType = {
+  id: any;
+};

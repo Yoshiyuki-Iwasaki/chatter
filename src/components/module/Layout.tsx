@@ -5,7 +5,7 @@ import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
-const Layout : React.FC = ({ children }: any) => {
+const Layout: React.FC<any> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   if (loading) return <h6>Loading...</h6>;
   if (error) return null;
@@ -14,15 +14,7 @@ const Layout : React.FC = ({ children }: any) => {
     <>
       <Header />
       <Meta title="Top" description="This is Top page." />
-      <Main>
-        {!user ? (
-          <Auth />
-        ) : (
-          <Inner>
-            {children}
-          </Inner>
-        )}
-      </Main>
+      <Main>{!user ? <Auth /> : <Inner>{children}</Inner>}</Main>
     </>
   );
 };

@@ -3,8 +3,9 @@ import marked from "marked";
 import styled from "styled-components";
 import { useState } from 'react';
 import firebase from "../../firebase/clientApp";
+import { ChatItemType } from "../declarations/chat";
 
-const ChatInput = ({ id }) => {
+const ChatInput: React.FC<ChatItemType> = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");

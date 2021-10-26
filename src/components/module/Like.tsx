@@ -24,14 +24,11 @@ const LikeCount = styled.button`
   color: gray;
 `;
 
-const Like: React.FC<Props> = ({ postId }: Props) => {
+const Like: React.FC<Props> = ({ postId }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [done, setDone] = useState(false);
   const [likeCount, setlikeCount] = useState(0);
-  const convertJST = new Date();
-  convertJST.setHours(convertJST.getHours());
-  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
   useEffect(() => {
     loadingLike();
