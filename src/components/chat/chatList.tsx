@@ -7,7 +7,11 @@ import { ChatItemType } from "../declarations/chat";
 const ChatList: React.FC<ChatItemType> = ({ id }) => {
   const db = firebase.firestore();
   const [data, loading, error] = useCollection(
-    db.collection("chat").doc(id).collection("messages"),
+    db
+      .collection("chat")
+      .doc(id)
+      .collection("messages")
+      .orderBy("createdAt", "asc"),
     {}
   );
 
