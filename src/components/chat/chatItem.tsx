@@ -5,14 +5,8 @@ import marked from "marked";
 import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
+import { Props } from "../declarations/chat";
 
-interface Props {
-  key: number;
-  id: number;
-  message: string;
-  userId: string;
-  createdAt: string;
-}
 
 const ChatItem: React.FC<Props> = ({
   id,
