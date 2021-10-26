@@ -1,6 +1,6 @@
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Layout from "../components/Layout";
+import Layout from "../components/module/Layout";
 import ChatList from "../components/mychat/ChatList";
 import styled from "styled-components";
 import Sidebar from "../components/sidebar/Sidebar";
