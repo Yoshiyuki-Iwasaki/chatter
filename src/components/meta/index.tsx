@@ -1,9 +1,6 @@
 import Head from 'next/head';
+import { Props } from "../declarations/meta";
 
-interface Props {
-  title: string;
-  description: string;
-}
 
 const Meta = ({
   title = "Photo Application",

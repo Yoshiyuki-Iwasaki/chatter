@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
-
-interface Props {
-  postId: number;
-}
+import { Props } from "../declarations/like";
 
 const Wrapper = styled.div`
   margin-top: 20px;

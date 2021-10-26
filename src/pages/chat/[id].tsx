@@ -1,5 +1,5 @@
 import ChatList from "../../components/chat/ChatList";
-import Layout from "../../components/Layout";
+import Layout from "../../components/module/Layout";
 import firebase from "../../firebase/clientApp";
 import Sidebar from "../../components/sidebar/Sidebar";
 import styled from "styled-components";
