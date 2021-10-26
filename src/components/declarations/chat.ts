@@ -3,5 +3,5 @@ export type Props = {
   id: number;
   message: string;
   userId: string;
-  createdAt: string;
+  createdAt: any;
 }

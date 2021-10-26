@@ -6,7 +6,7 @@ import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
 import { Props } from "../declarations/chat";
-
+import dayjs from "dayjs";
 
 const ChatItem: React.FC<Props> = ({
   id,
@@ -17,10 +17,10 @@ const ChatItem: React.FC<Props> = ({
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
-
+  let dueDate;
+  if (createdAt) {dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");}
   if (loading) return <h6>Loading...</h6>;
   if (error) return null;
-
   return (
     <List>
       <Inner>
@@ -44,7 +44,7 @@ const ChatItem: React.FC<Props> = ({
                 <TitleLink>{value.data().displayName}</TitleLink>
               </Link>
             </Title>
-            <Date>{createdAt}</Date>
+            {createdAt && <Date>{dueDate}</Date>}
           </TextAreaInner>
           <Body dangerouslySetInnerHTML={{ __html: marked(message) }} />
           <Like postId={id} />
