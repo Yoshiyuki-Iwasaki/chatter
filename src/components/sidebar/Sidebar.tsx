@@ -4,15 +4,12 @@ import styled from "styled-components";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<any> = ({ user }) => {
   const router = useRouter();
-  const [currentUser, loading, error] = useAuthState(firebase.auth());
-  if (loading) return <h6>Loading...</h6>;
-  if (error) return null;
 
   const SendToMychat = () => {
     router.push(`/`);
-  }
+  };
 
   return (
     <>
@@ -21,12 +18,12 @@ const Sidebar: React.FC = () => {
         <ListItem onClick={() => SendToMychat()}>
           <ListInner>
             <IconArea>
-              <Icon src={currentUser.photoURL} />
+              <Icon src={user.photoURL} />
             </IconArea>
-            <Text>{currentUser.displayName}</Text>
+            <Text>{user.displayName}</Text>
           </ListInner>
         </ListItem>
-        <SidebarList currentUser={currentUser} />
+        <SidebarList currentUser={user} />
       </List>
     </>
   );

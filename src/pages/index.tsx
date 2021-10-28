@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <Layout>
       <SidebarArea>
-        <Sidebar />
+        <Sidebar user={user} />
       </SidebarArea>
       <ChatArea>{user && <ChatList id={user.uid} />}</ChatArea>
     </Layout>

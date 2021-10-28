@@ -1,15 +1,19 @@
 import ChatList from "../../components/chat/ChatList";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Layout from "../../components/module/Layout";
 import firebase from "../../firebase/clientApp";
 import Sidebar from "../../components/sidebar/Sidebar";
 import styled from "styled-components";
 
-const chatDetail = ({ todo }) => {
+const ChatDetail = ({ todo }) => {
+  const [user, loading, error] = useAuthState(firebase.auth());
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
   return (
     <>
       <Layout>
         <SidebarArea>
-          <Sidebar />
+          <Sidebar user={user} />
         </SidebarArea>
         <ChatArea>
           <ChatList id={todo} />
@@ -19,7 +23,7 @@ const chatDetail = ({ todo }) => {
   );
 };
 
-export default chatDetail;
+export default ChatDetail;
 
 export const getStaticPaths = async () => {
   const db = firebase.firestore();
