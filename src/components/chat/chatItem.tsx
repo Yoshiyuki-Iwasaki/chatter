@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "../module/Like";
@@ -17,10 +18,20 @@ const ChatItem: React.FC<Props> = ({
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
+  const [user, userLoading, userError] = useAuthState(firebase.auth());
   let dueDate;
   if (createdAt) {dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");}
-  if (loading) return <h6>Loading...</h6>;
-  if (error) return null;
+  if (loading || userLoading) return <h6>Loading...</h6>;
+  if (error || userError) return null;
+
+  console.log("userId", userId);
+  console.log("value.data().uid", value.data().uid);
+
+  const List = styled.li`
+    display: flex;
+    justify-content: ${userId === user.uid ? "flex-end" : "flex-start"};
+  `;
+
   return (
     <List>
       <Inner>
@@ -56,12 +67,10 @@ const ChatItem: React.FC<Props> = ({
 
 export default ChatItem;
 
-const List = styled.li``;
-
 const Inner = styled.div`
   padding: 20px 10px;
   display: flex;
-  border-bottom: 1px solid rgb(235, 239, 244);
+  max-width: 50%;
 `;
 
 const IconArea = styled.a`
