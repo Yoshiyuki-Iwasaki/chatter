@@ -21,13 +21,7 @@ const Layout: React.FC<any> = ({ children }) => {
 
 export default Layout;
 
-const Main = styled.div`
-  height: calc(100vh - 58px);
-
-  @media (max-width: 768px) {
-    height: auto;
-  }
-`;
+const Main = styled.div``;
 const Inner = styled.div`
   display: flex;
   width: 100%;

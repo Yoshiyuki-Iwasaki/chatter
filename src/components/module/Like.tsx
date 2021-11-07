@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
-import { Props } from "../declarations/like";
+import { Props } from "../../declarations/like";
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -21,7 +21,6 @@ const LikedButton = styled(LikeButton)`
 const LikeCount = styled.button`
   margin-left: 5px;
   font-size: 14px;
-  color: gray;
 `;
 
 const Like: React.FC<Props> = ({ postId }) => {

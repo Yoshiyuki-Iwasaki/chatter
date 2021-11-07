@@ -22,8 +22,7 @@ const Home = () => {
 export default Home;
 
 
-const SidebarArea = styled.div`
-  background: rgba(243, 244, 246, 0.8);
+const SidebarArea = styled.aside`
   width: calc(100% / 5);
 
   @media (max-width: 768px) {
@@ -31,8 +30,8 @@ const SidebarArea = styled.div`
   }
 `;
 
-const ChatArea = styled.div`
-  margin: 0 20px;
+const ChatArea = styled.main`
+  padding: 0 20px;
   width: calc(100% - (100% / 5));
 
   @media (max-width: 768px) {

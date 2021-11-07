@@ -6,7 +6,7 @@ import marked from "marked";
 import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
-import { Props } from "../declarations/chat";
+import { Props } from "../../declarations/chat";
 import dayjs from "dayjs";
 
 const ChatItem: React.FC<Props> = ({
@@ -23,9 +23,6 @@ const ChatItem: React.FC<Props> = ({
   if (createdAt) {dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");}
   if (loading || userLoading) return <h6>Loading...</h6>;
   if (error || userError) return null;
-
-  console.log("userId", userId);
-  console.log("value.data().uid", value.data().uid);
 
   const List = styled.li`
     display: flex;
@@ -101,7 +98,6 @@ const TextAreaInner = styled.div`
 const Title = styled.h4``;
 const TitleLink = styled.a`
   font-size: 15px;
-  color: gray;
   font-weight: 700;
   cursor: pointer;
   transition: opacity 0.6s;
@@ -113,13 +109,11 @@ const TitleLink = styled.a`
 const Date = styled.p`
   margin-left: 20px;
   font-size: 12px;
-  color: gray;
 `;
 const Body = styled.div`
   margin-top: 20px;
 
   > p {
     font-size: 14px;
-    color: gray;
   }
 `;

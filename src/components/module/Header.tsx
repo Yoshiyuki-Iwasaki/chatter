@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import Link from 'next/link';
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 const Header: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
+  const { theme, toggleDarkMode } = useContext(DarkModeContext);
   const logout = () => {
     firebase.auth().signOut();
   };
@@ -24,6 +26,9 @@ const Header: React.FC = () => {
         {user && (
           <>
             <LeftArea>
+              <DarkButton onClick={toggleDarkMode}>
+                {theme == "dark" ? "🌑" : "🌝"}
+              </DarkButton>
               <Hover>
                 <Wrapper>
                   <Icon>
@@ -51,7 +56,6 @@ export default Header
 const HeaderLayout = styled.header`
   margin: 0 auto;
   width: 100%;
-  background: rgba(243, 244, 246, 0.8);
 `;
 const Inner = styled.div`
   @media screen and (max-width: 768px) {
@@ -80,10 +84,12 @@ const LeftArea = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const DarkButton = styled.button`
+  margin-right: 10px;
+`;
 const Text = styled.span`
   cursor: pointer;
   font-size: 15px;
-  color: gray;
   letter-spacing: 0.025em;
   font-weight: 700;
 `;
@@ -119,7 +125,6 @@ const List = styled.ul`
     height: 8px;
     border-top: 1px solid gray;
     border-right: 1px solid gray;
-    background: gray;
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
@@ -130,7 +135,6 @@ const List = styled.ul`
   }
 `;
 const ListItem = styled.li`
-  background: gray;
 `;
 const ListLink = styled.a`
   padding: 15px 0;
@@ -140,7 +144,6 @@ const ListLink = styled.a`
   transition: opacity 0.6s;
   cursor: pointer;
   font-size: 13px;
-  color: #fff;
   font-weight: 700;
 
   &:hover {
@@ -150,10 +153,10 @@ const ListLink = styled.a`
 const Button = styled.a`
   padding: 15px 0;
   display: inline-block;
+  background: gray;
   cursor: pointer;
   width: 200px;
   font-size: 13px;
-  color: #fff;
   font-weight: 700;
   transition: opacity 0.6s;
 
