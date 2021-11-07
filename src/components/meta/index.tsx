@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Props } from "../declarations/meta";
+import { Props } from "../../declarations/meta";
 
 
 const Meta: React.FC<Props> = ({

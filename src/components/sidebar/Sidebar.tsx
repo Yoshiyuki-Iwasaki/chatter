@@ -34,9 +34,7 @@ export default Sidebar;
 const Title = styled.h2`
   margin-top: ${props => (props.marginTop ? props.marginTop : "")};
   padding: 20px;
-  background: gray;
   font-size: 15px;
-  color: #fff;
   font-weight: 700;
 `;
 
@@ -71,6 +69,5 @@ const Text = styled.p`
   width: calc(100% - 40px);
   display: block;
   font-size: 14px;
-  color: gray;
   font-weight: 400;
 `;

@@ -64,7 +64,6 @@ const Text = styled.p`
   width: calc(100% - 40px);
   display: block;
   font-size: 14px;
-  color: gray;
   font-weight: 400;
 `;
 const GroupeList = styled.ul``;
