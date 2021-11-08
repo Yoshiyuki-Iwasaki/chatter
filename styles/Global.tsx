@@ -7,11 +7,15 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.txt};
   }
 
-  h1,h2,h3,h4,h5,p,button,span,a {
+  h1,h2,h3,h4,h5,p,button,span,a,input {
     color: ${({ theme }) => theme.txt};
   }
 
   aside,main {
     background: ${({ theme }) => theme.bg};
+  }
+
+  aside {
+    border-right: 1px solid ${({ theme }) => theme.txt};
   }
 `;
