@@ -1,6 +1,5 @@
 export type ChatItemType = {
-  key: number;
-  id: number;
+  id: any;
   message: string;
   userId: string;
   createdAt: any;
@@ -8,5 +7,5 @@ export type ChatItemType = {
 
 
 export type ChatListType = {
-  id: string;
+  id: any;
 };
