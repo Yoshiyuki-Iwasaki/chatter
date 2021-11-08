@@ -4,25 +4,6 @@ import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
 import { Props } from "../../declarations/like";
 
-const Wrapper = styled.div`
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-`;
-
-const LikeButton = styled.span`
-  z-index: 100;
-`;
-
-const LikedButton = styled(LikeButton)`
-  color: #e94709;
-`;
-
-const LikeCount = styled.button`
-  margin-left: 5px;
-  font-size: 14px;
-`;
-
 const Like: React.FC<Props> = ({ postId }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -96,3 +77,22 @@ const Like: React.FC<Props> = ({ postId }) => {
 };
 
 export default Like;
+
+const Wrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const LikeButton = styled.span`
+  z-index: 100;
+`;
+
+const LikedButton = styled(LikeButton)`
+  color: #e94709;
+`;
+
+const LikeCount = styled.button`
+  margin-left: 5px;
+  font-size: 14px;
+`;
