@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState } from 'react';
 import firebase from "../../firebase/clientApp";
 
-const ChatInput = () => {
+const ChatInput: React.FC = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");

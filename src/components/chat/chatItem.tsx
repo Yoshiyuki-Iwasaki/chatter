@@ -6,10 +6,10 @@ import marked from "marked";
 import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
-import { Props } from "../../declarations/chat";
+import { ChatItemType } from "../../declarations/chat";
 import dayjs from "dayjs";
 
-const ChatItem: React.FC<Props> = ({
+const ChatItem: React.FC<ChatItemType> = ({
   id,
   message,
   userId,
@@ -20,7 +20,9 @@ const ChatItem: React.FC<Props> = ({
   );
   const [user, userLoading, userError] = useAuthState(firebase.auth());
   let dueDate;
-  if (createdAt) {dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");}
+  if (createdAt) {
+    dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");
+  }
   if (loading || userLoading) return <h6>Loading...</h6>;
   if (error || userError) return null;
 

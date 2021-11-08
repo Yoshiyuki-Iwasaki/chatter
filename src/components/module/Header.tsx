@@ -136,20 +136,6 @@ const List = styled.ul`
 `;
 const ListItem = styled.li`
 `;
-const ListLink = styled.a`
-  padding: 15px 0;
-  display: inline-block;
-  border-bottom: 1px solid #fff;
-  width: 200px;
-  transition: opacity 0.6s;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
-
-  &:hover {
-    opacity: 0.6;
-  }
-`;
 const Button = styled.a`
   padding: 15px 0;
   display: inline-block;
@@ -157,6 +143,7 @@ const Button = styled.a`
   cursor: pointer;
   width: 200px;
   font-size: 13px;
+  color:#fff;
   font-weight: 700;
   transition: opacity 0.6s;
 
