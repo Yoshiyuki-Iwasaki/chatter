@@ -1,14 +1,15 @@
-import ReactMde from "react-mde";
-import marked from "marked";
+import { useState } from "react";
 import styled from "styled-components";
-import { useState } from 'react';
 import firebase from "../../firebase/clientApp";
 import { ChatListType } from "../../declarations/chat";
 
 const ChatInput: React.FC<ChatListType> = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
-  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
+
+  const handleInput = e => {
+    setText(e.target.value);
+  };
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -24,16 +25,9 @@ const ChatInput: React.FC<ChatListType> = ({ id }) => {
 
   return (
     <>
-      <Form onSubmit={e => handleOnSubmit(e)}>
-        <Input type="submit" value="投稿" onChange={e => handleOnSubmit(e)} />
+      <Form onSubmit={handleOnSubmit}>
+        <StyledInput type="text" value={text} onChange={handleInput} />
       </Form>
-      <ReactMde
-        value={text}
-        onChange={setText}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={markdown => Promise.resolve(marked(markdown))}
-      />
     </>
   );
 };
@@ -41,19 +35,18 @@ const ChatInput: React.FC<ChatListType> = ({ id }) => {
 export default ChatInput;
 
 const Form = styled.form`
-  margin-top: 30px;
-  text-align: right;
+  padding: 25px 0;
+  text-align: center;
+  border-bottom: 1px solid rgb(56, 68, 77);
 `;
+const StyledInput = styled.input`
+  width: 100%;
+  height: 120px;
+  border: 1px solid gray;
+  font-size: 14px;
 
-const Input = styled.input`
-  padding: 15px 70px;
-  background: pink;
-  transition: opacity 0.6s;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-
-  &:hover {
-    opacity: 0.6;
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 100px;
   }
 `;
