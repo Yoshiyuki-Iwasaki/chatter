@@ -1,12 +1,10 @@
-import ReactMde from "react-mde";
-import marked from "marked";
 import styled from "styled-components";
 import { useState } from 'react';
 import firebase from "../../firebase/clientApp";
 
 const ChatInput: React.FC = () => {
   const db = firebase.firestore();
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
 
   const handleInput = e => {
     setText(e.target.value);
@@ -36,7 +34,6 @@ const ChatInput: React.FC = () => {
 export default ChatInput;
 
 const Form = styled.form`
-  padding: 25px 0;
   text-align: center;
   border-bottom: 1px solid rgb(56, 68, 77);
 `;

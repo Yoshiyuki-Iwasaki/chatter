@@ -3,6 +3,7 @@ import firebase from "../../firebase/clientApp";
 import ChatItem from "./ChatItem";
 import ChatInput from "./ChatInput";
 import { ChatListType } from "../../declarations/chat";
+import styled from "styled-components";
 
 const ChatList: React.FC<ChatListType> = ({ id }) => {
   const db = firebase.firestore();
@@ -20,7 +21,7 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
 
   return (
     <>
-      <ul>
+      <List>
         {data &&
           data.docs.map((doc, index) => (
             <ChatItem
@@ -31,10 +32,15 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
               createdAt={doc.data().createdAt}
             />
           ))}
-      </ul>
+      </List>
       <ChatInput id={id} />
     </>
   );
 };
 
 export default ChatList;
+
+const List = styled.ul`
+  height: calc(100vh - 191px);
+  overflow: scroll;
+`;

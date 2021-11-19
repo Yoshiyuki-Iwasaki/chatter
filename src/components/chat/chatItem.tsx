@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
@@ -30,25 +30,13 @@ const ChatItem: React.FC<ChatItemType> = ({
   return (
     <List>
       <Inner>
-        <Link
-          href={`/user/${value.data().uid}`}
-          as={`/user/${value.data().uid}`}
-          passHref
-        >
-          <IconArea>
-            <Icon src={value.data().photoURL} />
-          </IconArea>
-        </Link>
+        <IconArea>
+          <Icon src={value.data().photoURL} />
+        </IconArea>
         <TextArea>
           <TextAreaInner>
             <Title>
-              <Link
-                href={`/user/${value.data().uid}`}
-                as={`/user/${value.data().uid}`}
-                passHref
-              >
                 <TitleLink>{value.data().displayName}</TitleLink>
-              </Link>
             </Title>
             {createdAt && <Date>{formatDate(createdAt.toDate())}</Date>}
           </TextAreaInner>
@@ -68,15 +56,9 @@ const Inner = styled.div`
   max-width: 50%;
 `;
 
-const IconArea = styled.a`
+const IconArea = styled.div`
   margin-right: 10px;
   width: 32px;
-  cursor: pointer;
-  transition: opacity 0.6s;
-
-  &:hover {
-    opacity: 0.6;
-  }
 `;
 
 const Icon = styled.img`
@@ -94,15 +76,9 @@ const TextAreaInner = styled.div`
   align-items: center;
 `;
 const Title = styled.h4``;
-const TitleLink = styled.a`
+const TitleLink = styled.p`
   font-size: 15px;
   font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.6s;
-
-  &:hover {
-    opacity: 0.6;
-  }
 `;
 const Date = styled.p`
   margin-left: 20px;

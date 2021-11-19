@@ -13,7 +13,11 @@ const ChatDetail = ({ todo }) => {
     <>
       <Layout>
         <SidebarArea>
-          <Sidebar user={user} />
+          <Sidebar
+            uid={user.uid}
+            photoURL={user.photoURL}
+            displayName={user.displayName}
+          />
         </SidebarArea>
         <ChatArea>
           <ChatList id={todo} />
@@ -41,7 +45,6 @@ export const getStaticProps = async context => {
   return {
     props: {
       todo: array,
-      id: id,
     },
   };
 };
