@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/globals.css";
-import "react-mde/lib/styles/css/react-mde-all.css";
 import { GlobalStyle } from "../../styles/Global";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../styles/Themes";
