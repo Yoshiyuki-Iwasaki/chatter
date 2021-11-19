@@ -5,7 +5,7 @@ import { ChatListType } from "../../declarations/chat";
 
 const ChatInput: React.FC<ChatListType> = ({ id }) => {
   const db = firebase.firestore();
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
 
   const handleInput = e => {
     setText(e.target.value);
@@ -35,7 +35,6 @@ const ChatInput: React.FC<ChatListType> = ({ id }) => {
 export default ChatInput;
 
 const Form = styled.form`
-  padding: 25px 0;
   text-align: center;
   border-bottom: 1px solid rgb(56, 68, 77);
 `;
