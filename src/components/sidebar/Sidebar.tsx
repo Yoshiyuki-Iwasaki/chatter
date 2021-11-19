@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
 
-const Sidebar: React.FC<any> = ({ user }) => {
+const Sidebar: React.FC<any> = ({ uid, photoURL, displayName }) => {
   const router = useRouter();
 
   const SendToMychat = () => {
@@ -18,12 +18,12 @@ const Sidebar: React.FC<any> = ({ user }) => {
         <ListItem onClick={() => SendToMychat()}>
           <ListInner>
             <IconArea>
-              <Icon src={user.photoURL} />
+              <Icon src={photoURL} />
             </IconArea>
-            <Text>{user.displayName}</Text>
+            <Text>{displayName}</Text>
           </ListInner>
         </ListItem>
-        <SidebarList currentUser={user} />
+        <SidebarList currentUserId={uid} />
       </List>
     </>
   );

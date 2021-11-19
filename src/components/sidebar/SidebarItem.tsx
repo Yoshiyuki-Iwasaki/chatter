@@ -3,17 +3,31 @@ import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
 import getRecipient from "../../utils/getRecipient";
 
-const SidebarItem = ({ currentUser, chatList, uid, photoURL, displayName }) => {
+type Props = {
+  currentUserId?: number;
+  chatList: any;
+  uid: number;
+  photoURL: string;
+  displayName: string;
+};
+
+const SidebarItem = ({
+  currentUserId,
+  chatList,
+  uid,
+  photoURL,
+  displayName,
+}: Props) => {
   const db = firebase.firestore();
   const router = useRouter();
   const createChatRoom = async userId => {
     await chatList?.docs.map(doc => {
-      if (getRecipient(doc.data().users, currentUser.uid)) {
+      if (getRecipient(doc.data().users, currentUserId)) {
         router.push(`/chat/${doc.id}`);
       } else {
         db.collection("chat").add({
           id: new Date().getTime(),
-          users: [userId, currentUser.uid],
+          users: [userId, currentUserId],
         });
         router.push(`/chat/${doc.id}`);
       }

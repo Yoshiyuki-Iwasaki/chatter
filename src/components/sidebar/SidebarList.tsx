@@ -2,14 +2,18 @@ import firebase from "../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import SidebarItem from "./SidebarItem";
 
-const SidebarList: React.FC<any> = ({ currentUser }) => {
+type Props = {
+  currentUserId?: number;
+};
+
+const SidebarList: React.FC<Props> = ({ currentUserId }) => {
   const db = firebase.firestore();
   const [usersList, loading, error] = useCollection(
-    db.collection("users").where("uid", "!=", currentUser.uid),
+    db.collection("users").where("uid", "!=", currentUserId),
     {}
   );
   const [chatList, chatLoading, chatError] = useCollection(
-    db.collection("chat").where("users", "array-contains", currentUser.uid),
+    db.collection("chat").where("users", "array-contains", currentUserId),
     {}
   );
   if (loading || chatLoading) return <h6>Loading...</h6>;
@@ -20,7 +24,7 @@ const SidebarList: React.FC<any> = ({ currentUser }) => {
         usersList.docs.map((doc, index) => (
           <SidebarItem
             key={index}
-            currentUser={currentUser}
+            currentUserId={currentUserId}
             chatList={chatList}
             uid={doc.data().uid}
             photoURL={doc.data().photoURL}

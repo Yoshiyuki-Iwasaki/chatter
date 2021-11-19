@@ -9,10 +9,15 @@ const Home = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   if (loading) return <h6>Loading...</h6>;
   if (error) return null;
+
   return (
     <Layout>
       <SidebarArea>
-        <Sidebar user={user} />
+        <Sidebar
+          uid={user.uid}
+          photoURL={user.photoURL}
+          displayName={user.displayName}
+        />
       </SidebarArea>
       <ChatArea>{user && <ChatList id={user.uid} />}</ChatArea>
     </Layout>
