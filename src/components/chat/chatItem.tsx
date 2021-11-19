@@ -6,23 +6,19 @@ import marked from "marked";
 import Like from "../module/Like";
 import styled from "styled-components";
 import Link from "next/link";
+import { formatDate } from "../../utils/date";
 import { ChatItemType } from "../../declarations/chat";
-import dayjs from "dayjs";
 
 const ChatItem: React.FC<ChatItemType> = ({
   id,
   message,
   userId,
   createdAt,
-}): ReactElement => {
+}) => {
   const [value, loading, error] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
   const [user, userLoading, userError] = useAuthState(firebase.auth());
-  let dueDate;
-  if (createdAt) {
-    dueDate = dayjs(createdAt.toDate()).format("YYYY-MM-DD HH:mm");
-  }
   if (loading || userLoading) return <h6>Loading...</h6>;
   if (error || userError) return null;
 
@@ -54,7 +50,7 @@ const ChatItem: React.FC<ChatItemType> = ({
                 <TitleLink>{value.data().displayName}</TitleLink>
               </Link>
             </Title>
-            {createdAt && <Date>{dueDate}</Date>}
+            {createdAt && <Date>{formatDate(createdAt.toDate())}</Date>}
           </TextAreaInner>
           <Body dangerouslySetInnerHTML={{ __html: marked(message) }} />
           <Like postId={id} />

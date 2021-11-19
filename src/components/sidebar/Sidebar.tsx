@@ -3,8 +3,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
+import { SidebarType } from '../../declarations/sidebar'
 
-const Sidebar: React.FC<any> = ({ uid, photoURL, displayName }) => {
+const Sidebar: React.FC<SidebarType> = ({ uid, photoURL, displayName }) => {
   const router = useRouter();
 
   const SendToMychat = () => {

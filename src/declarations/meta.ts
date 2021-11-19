@@ -1,4 +1,4 @@
-export type Props =  {
+export type MetaType =  {
   title: string;
   description: string;
 }
