@@ -1,5 +1,4 @@
 module.exports = {
-  distDir: "public/",
   reactStrictMode: true,
   images: {
     loader: "imgix",

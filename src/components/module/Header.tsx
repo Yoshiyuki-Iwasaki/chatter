@@ -8,6 +8,7 @@ import { DarkModeContext } from "../../context/DarkModeContext";
 const Header: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
+
   const logout = () => {
     firebase.auth().signOut();
   };
