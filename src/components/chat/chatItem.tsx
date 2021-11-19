@@ -5,7 +5,6 @@ import firebase from "../../firebase/clientApp";
 import marked from "marked";
 import Like from "../module/Like";
 import styled from "styled-components";
-import Link from "next/link";
 import { formatDate } from "../../utils/date";
 import { ChatItemType } from "../../declarations/chat";
 
