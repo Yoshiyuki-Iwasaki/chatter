@@ -2,22 +2,15 @@ import { useRouter } from "next/router";
 import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
 import getRecipient from "../../utils/getRecipient";
+import { SidebarItemType } from "../../declarations/sidebar";
 
-type Props = {
-  currentUserId?: number;
-  chatList: any;
-  uid: number;
-  photoURL: string;
-  displayName: string;
-};
-
-const SidebarItem = ({
+const SidebarItem: React.FC<SidebarItemType> = ({
   currentUserId,
   chatList,
   uid,
   photoURL,
   displayName,
-}: Props) => {
+}) => {
   const db = firebase.firestore();
   const router = useRouter();
   const createChatRoom = async userId => {

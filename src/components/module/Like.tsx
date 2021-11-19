@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
-import { Props } from "../../declarations/like";
+import { LikeType } from "../../declarations/like";
 
-const Like: React.FC<Props> = ({ postId }) => {
+const Like: React.FC<LikeType> = ({ postId }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [done, setDone] = useState(false);

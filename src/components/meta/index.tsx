@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { Props } from "../../declarations/meta";
+import { MetaType } from "../../declarations/meta";
 
 
-const Meta: React.FC<Props> = ({
+const Meta: React.FC<MetaType> = ({
   title = "Photo Application",
   description = "This is Photo Application!!!!",
 }) => {

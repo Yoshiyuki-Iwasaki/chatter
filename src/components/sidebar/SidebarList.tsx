@@ -1,12 +1,9 @@
 import firebase from "../../firebase/clientApp";
 import { useCollection } from "react-firebase-hooks/firestore";
 import SidebarItem from "./SidebarItem";
+import { SidebarListType } from "../../declarations/sidebar";
 
-type Props = {
-  currentUserId?: number;
-};
-
-const SidebarList: React.FC<Props> = ({ currentUserId }) => {
+const SidebarList: React.FC<SidebarListType> = ({ currentUserId }) => {
   const db = firebase.firestore();
   const [usersList, loading, error] = useCollection(
     db.collection("users").where("uid", "!=", currentUserId),

@@ -4,12 +4,9 @@ import Auth from "./Auth";
 import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
+import { LayoutType } from "../../declarations/layout";
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<LayoutType> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   if (loading) return <h6>Loading...</h6>;
   if (error) return null;
