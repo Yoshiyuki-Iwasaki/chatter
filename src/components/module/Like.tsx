@@ -67,9 +67,17 @@ const Like: React.FC<LikeType> = ({ postId }) => {
   return (
     <Wrapper>
       {!done ? (
-        <LikeButton onClick={clickLikeButton}>いいね</LikeButton>
+        <LikeButton onClick={clickLikeButton}>
+          <Icon>
+            <IconImage src="/icon_like.png" alt="" />
+          </Icon>
+        </LikeButton>
       ) : (
-        <LikedButton onClick={clickRemoveLikeButton}>いいね済み</LikedButton>
+        <LikedButton onClick={clickRemoveLikeButton}>
+          <Icon>
+            <IconImage src="/icon_liked.png" alt="" />
+          </Icon>
+        </LikedButton>
       )}
       <LikeCount>{likeCount}</LikeCount>
     </Wrapper>
@@ -95,4 +103,16 @@ const LikedButton = styled(LikeButton)`
 const LikeCount = styled.button`
   margin-left: 5px;
   font-size: 14px;
+`;
+
+const Icon = styled.figure`
+  width: 20px;
+
+  @media (max-width: 768px) {
+    width: 20px;
+  }
+`;
+
+const IconImage = styled.img`
+  width: 100%;
 `;
