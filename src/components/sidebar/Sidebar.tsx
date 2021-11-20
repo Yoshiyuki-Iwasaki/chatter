@@ -39,7 +39,10 @@ const Title = styled.h2`
   font-weight: 700;
 `;
 
-const List = styled.ul``;
+const List = styled.ul`
+  height: calc(100vh - 131px);
+  overflow: scroll;
+`;
 const ListItem = styled.li`
   border-bottom: 1px solid gray;
 `;
