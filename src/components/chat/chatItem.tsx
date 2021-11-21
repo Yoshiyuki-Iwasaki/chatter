@@ -50,9 +50,11 @@ const ChatItem: React.FC<ChatItemType> = ({
 export default ChatItem;
 
 const Inner = styled.div`
-  padding: 20px 10px;
+  margin-bottom: 15px;
+  padding: 15px 25px;
   display: flex;
   max-width: 50%;
+  background: #f0f3fc;
 `;
 
 const IconArea = styled.div`

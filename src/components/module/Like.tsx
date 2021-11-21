@@ -7,8 +7,8 @@ import { LikeType } from "../../declarations/like";
 const Like: React.FC<LikeType> = ({ postId }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
-  const [done, setDone] = useState(false);
-  const [likeCount, setlikeCount] = useState(0);
+  const [done, setDone] = useState<boolean>(false);
+  const [likeCount, setlikeCount] = useState<number>(0);
 
   useEffect(() => {
     loadingLike();
