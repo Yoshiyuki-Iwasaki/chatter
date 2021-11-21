@@ -13,11 +13,13 @@ const Home = () => {
   return (
     <Layout>
       <SidebarArea>
-        <Sidebar
-          uid={user.uid}
-          photoURL={user.photoURL}
-          displayName={user.displayName}
-        />
+        {user && (
+          <Sidebar
+            uid={user.uid}
+            photoURL={user.photoURL}
+            displayName={user.displayName}
+          />
+        )}
       </SidebarArea>
       <ChatArea>{user && <ChatList id={user.uid} />}</ChatArea>
     </Layout>
