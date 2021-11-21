@@ -54,7 +54,12 @@ const Inner = styled.div`
   padding: 15px 25px;
   display: flex;
   max-width: 50%;
-  background: #f0f3fc;
+  background: ${({ theme }) => theme.chatBg};
+  border-radius: 5px;
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
 `;
 
 const IconArea = styled.div`

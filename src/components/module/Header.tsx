@@ -59,8 +59,6 @@ const HeaderLayout = styled.header`
   width: 100%;
 `;
 const Inner = styled.div`
-  @media screen and (max-width: 768px) {
-  }
   margin: 0 auto;
   padding: 15px 30px;
   text-align: center;
@@ -93,6 +91,10 @@ const Text = styled.span`
   font-size: 15px;
   letter-spacing: 0.025em;
   font-weight: 700;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 const Hover = styled.div`
   position: relative;
@@ -104,6 +106,9 @@ const Wrapper = styled.div`
 const Icon = styled.figure`
   margin-right: 10px;
   width: 40px;
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+  }
 `;
 const IconImage = styled.img`
   width: 100%;

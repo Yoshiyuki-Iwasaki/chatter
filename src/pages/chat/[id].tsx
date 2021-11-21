@@ -13,11 +13,13 @@ const ChatDetail = ({ todo }) => {
     <>
       <Layout>
         <SidebarArea>
-          <Sidebar
-            uid={user.uid}
-            photoURL={user.photoURL}
-            displayName={user.displayName}
-          />
+          {user && (
+            <Sidebar
+              uid={user.uid}
+              photoURL={user.photoURL}
+              displayName={user.displayName}
+            />
+          )}
         </SidebarArea>
         <ChatArea>
           <ChatList id={todo} />

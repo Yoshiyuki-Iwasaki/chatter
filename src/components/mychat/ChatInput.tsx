@@ -6,7 +6,7 @@ const ChatInput: React.FC = () => {
   const db = firebase.firestore();
   const [text, setText] = useState<string>("");
 
-  const handleInput = e => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
