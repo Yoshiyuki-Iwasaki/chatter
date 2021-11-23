@@ -10,6 +10,14 @@ const ChatInput: React.FC = () => {
     setText(e.target.value);
   };
 
+  const scrollTo = (direction: "top" | "end") => {
+    const messageList = document.getElementById("message-list");
+    if (messageList) {
+      messageList.scrollTop =
+        direction === "top" ? 50 : messageList.scrollHeight;
+    }
+  };
+
   const handleOnSubmit = async e => {
     e.preventDefault();
     if (!text) return;
@@ -20,6 +28,7 @@ const ChatInput: React.FC = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setText("");
+    scrollTo("end");
   };
 
   return (

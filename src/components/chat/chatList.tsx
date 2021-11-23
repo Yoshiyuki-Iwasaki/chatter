@@ -21,17 +21,22 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
 
   return (
     <>
-      <List>
+      <List id="message-list">
         {data &&
-          data.docs.map((doc, index) => (
-            <ChatItem
-              key={index}
-              id={doc.data().id}
-              message={doc.data().message}
-              userId={doc.data().userId}
-              createdAt={doc.data().createdAt}
-            />
-          ))}
+          data.docs.map(
+            (
+              doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>,
+              index: number
+            ) => (
+              <ChatItem
+                key={index}
+                id={doc.data().id}
+                message={doc.data().message}
+                userId={doc.data().userId}
+                createdAt={doc.data().createdAt}
+              />
+            )
+          )}
       </List>
       <ChatInput id={id} />
     </>
