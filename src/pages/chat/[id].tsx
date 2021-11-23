@@ -1,26 +1,12 @@
 import ChatList from "../../components/chat/ChatList";
-import { useAuthState } from "react-firebase-hooks/auth";
 import Layout from "../../components/module/Layout";
 import firebase from "../../firebase/clientApp";
-import Sidebar from "../../components/sidebar/Sidebar";
 import styled from "styled-components";
 
 const ChatDetail = ({ todo }) => {
-  const [user, loading, error] = useAuthState(firebase.auth());
-  if (loading) return <h6>Loading...</h6>;
-  if (error) return null;
   return (
     <>
-      <Layout>
-        <SidebarArea>
-          {user && (
-            <Sidebar
-              uid={user.uid}
-              photoURL={user.photoURL}
-              displayName={user.displayName}
-            />
-          )}
-        </SidebarArea>
+      <Layout title={"チャット"}>
         <ChatArea>
           <ChatList id={todo} />
         </ChatArea>

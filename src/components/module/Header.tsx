@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import Link from 'next/link';
 import { DarkModeContext } from "../../context/DarkModeContext";
+import { COLORS } from '../../utils/variable';
 
-const Header: React.FC = () => {
+const Header: React.FC<any> = ({ title }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
@@ -24,6 +25,11 @@ const Header: React.FC = () => {
             <Logo>chatter</Logo>
           </Link>
         </Title>
+        <SpTitle>
+          <Link href="/" as="/" passHref>
+            <SpLogo>{title}</SpLogo>
+          </Link>
+        </SpTitle>
         {user && (
           <>
             <LeftArea>
@@ -38,6 +44,11 @@ const Header: React.FC = () => {
                   <Text>{user.displayName}</Text>
                 </Wrapper>
                 <List>
+                  <ListItem>
+                    <Link href="./userList" as="./userList" passHref>
+                      <a>ユーザーリスト</a>
+                    </Link>
+                  </ListItem>
                   <ListItem>
                     <Button onClick={() => logout()}>ログアウト</Button>
                   </ListItem>
@@ -60,19 +71,49 @@ const HeaderLayout = styled.header`
 `;
 const Inner = styled.div`
   margin: 0 auto;
-  padding: 15px 30px;
+  padding: 5px 15px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
-const Title = styled.div``;
+const Title = styled.h1`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 const Logo = styled.a`
   transition: opacity 0.6s;
   cursor: pointer;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.025em;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+const SpTitle = styled.h1`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+const SpLogo = styled.a`
+  display: none;
+  transition: opacity 0.6s;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
 
   &:hover {
     opacity: 0.6;
@@ -149,7 +190,7 @@ const Button = styled.a`
   cursor: pointer;
   width: 200px;
   font-size: 13px;
-  color:#fff;
+  color: ${COLORS.WHITE};
   font-weight: 700;
   transition: opacity 0.6s;
 
