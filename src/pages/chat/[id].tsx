@@ -51,14 +51,6 @@ export const getStaticProps = async context => {
   };
 };
 
-const SidebarArea = styled.aside`
-  width: calc(100% / 5);
-
-  @media (max-width: 768px) {
-    width: auto;
-  }
-`;
-
 const ChatArea = styled.main`
   padding: 0 20px;
   width: calc(100% - (100% / 5));

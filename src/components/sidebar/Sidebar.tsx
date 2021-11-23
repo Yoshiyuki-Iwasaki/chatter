@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarType> = ({ uid, photoURL, displayName }) => {
   };
 
   return (
-    <>
+    <SidebarArea>
       <Title>ユーザーリスト</Title>
       <List>
         <ListItem onClick={() => SendToMychat()}>
@@ -26,11 +26,26 @@ const Sidebar: React.FC<SidebarType> = ({ uid, photoURL, displayName }) => {
         </ListItem>
         <SidebarList currentUserId={uid} />
       </List>
-    </>
+    </SidebarArea>
   );
 };
 
 export default Sidebar;
+
+const SidebarArea = styled.aside`
+  display: block;
+  width: calc(100% / 5);
+
+  @media (max-width: 768px) {
+    display: none;
+    position: fixed;
+    top: 70 px;
+    left: 0;
+    width: 100%;
+    height: calc(100 vh - 70 px);
+    z-index: 10;
+  }
+`;
 
 const Title = styled.h2`
   margin-top: ${props => (props.marginTop ? props.marginTop : "")};
@@ -42,6 +57,10 @@ const Title = styled.h2`
 const List = styled.ul`
   height: calc(100vh - 131px);
   overflow: scroll;
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+  }
 `;
 const ListItem = styled.li`
   border-bottom: 1px solid gray;

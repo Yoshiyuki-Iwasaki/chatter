@@ -45,7 +45,7 @@ const StyledInput = styled.input`
   font-size: 14px;
 
   @media (max-width: 768px) {
-    width: 90%;
-    height: 100px;
+    width: 100%;
+    height: 70px;
   }
 `;

@@ -58,6 +58,7 @@ const Inner = styled.div`
   border-radius: 5px;
 
   @media (max-width: 768px) {
+    padding: 5px 15px;
     max-width: 90%;
   }
 `;
@@ -92,6 +93,10 @@ const Date = styled.p`
 `;
 const Body = styled.div`
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 
   > p {
     font-size: 14px;
