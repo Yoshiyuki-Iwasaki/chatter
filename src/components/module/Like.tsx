@@ -90,6 +90,10 @@ const Wrapper = styled.div`
   margin-top: 20px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const LikeButton = styled.span`

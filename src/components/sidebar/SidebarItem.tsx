@@ -73,5 +73,3 @@ const Text = styled.p`
   font-size: 14px;
   font-weight: 400;
 `;
-const GroupeList = styled.ul``;
-const GroupeListItem = styled.li``;

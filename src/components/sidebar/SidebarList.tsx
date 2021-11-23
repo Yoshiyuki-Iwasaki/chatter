@@ -18,16 +18,21 @@ const SidebarList: React.FC<SidebarListType> = ({ currentUserId }) => {
   return (
     <>
       {usersList &&
-        usersList.docs.map((doc, index) => (
-          <SidebarItem
-            key={index}
-            currentUserId={currentUserId}
-            chatList={chatList}
-            uid={doc.data().uid}
-            photoURL={doc.data().photoURL}
-            displayName={doc.data().displayName}
-          />
-        ))}
+        usersList.docs.map(
+          (
+            doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>,
+            index: number
+          ) => (
+            <SidebarItem
+              key={index}
+              currentUserId={currentUserId}
+              chatList={chatList}
+              uid={doc.data().uid}
+              photoURL={doc.data().photoURL}
+              displayName={doc.data().displayName}
+            />
+          )
+        )}
     </>
   );
 };
