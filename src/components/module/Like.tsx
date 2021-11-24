@@ -97,7 +97,6 @@ const Wrapper = styled.div`
 `;
 
 const LikeButton = styled.span`
-  z-index: 100;
 `;
 
 const LikedButton = styled(LikeButton)`

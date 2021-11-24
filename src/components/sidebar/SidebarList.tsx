@@ -5,33 +5,20 @@ import { SidebarListType } from "../../declarations/sidebar";
 
 const SidebarList: React.FC<SidebarListType> = ({ currentUserId }) => {
   const db = firebase.firestore();
-  const [usersList, loading, error] = useCollection(
-    db.collection("users").where("uid", "!=", currentUserId),
+  const [chatData, loading, error] = useCollection(
+    db.collection("chat"),
     {}
   );
-  const [chatList, chatLoading, chatError] = useCollection(
-    db.collection("chat").where("users", "array-contains", currentUserId),
-    {}
-  );
-  if (loading || chatLoading) return <h6>Loading...</h6>;
-  if (error || chatError) return null;
+  if (loading) return <h6>Loading...</h6>;
+  if (error) return null;
   return (
     <>
-      {usersList &&
-        usersList.docs.map(
+      {chatData &&
+        chatData.docs.map(
           (
             doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>,
             index: number
-          ) => (
-            <SidebarItem
-              key={index}
-              currentUserId={currentUserId}
-              chatList={chatList}
-              uid={doc.data().uid}
-              photoURL={doc.data().photoURL}
-              displayName={doc.data().displayName}
-            />
-          )
+          ) => <SidebarItem key={index} id={doc.id} title={doc.data().title} />
         )}
     </>
   );

@@ -5,13 +5,23 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { DarkModeContext } from "../../context/DarkModeContext";
 import { COLORS } from '../../utils/variable';
+import Modal from "./Modal";
 
-const Header: React.FC<any> = ({ title }) => {
+type TitleType = {
+  title:string;
+};
+
+const Header: React.FC<TitleType> = ({ title }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
+  const [show, setShow] = useState<boolean>(false);
 
   const logout = () => {
     firebase.auth().signOut();
+  };
+
+  const createGroupeChat = () => {
+    setShow(!show);
   };
 
   if (loading) return <h6>Loading...</h6>;
@@ -33,6 +43,10 @@ const Header: React.FC<any> = ({ title }) => {
         {user && (
           <>
             <LeftArea>
+              <GroupeButton onClick={createGroupeChat}>
+                グループ作成
+              </GroupeButton>
+              {show && <Modal currentUserId={user.uid} setShow={setShow} />}
               <DarkButton onClick={toggleDarkMode}>
                 {theme == "dark" ? "🌑" : "🌝"}
               </DarkButton>
@@ -71,11 +85,15 @@ const HeaderLayout = styled.header`
 `;
 const Inner = styled.div`
   margin: 0 auto;
-  padding: 5px 15px;
+  padding: 15px 25px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    padding: 5px 15px;
+  }
 `;
 const Title = styled.h1`
   @media screen and (max-width: 768px) {
@@ -124,8 +142,23 @@ const LeftArea = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const GroupeButton = styled.button`
+  margin-right: 15px;
+  padding: 10px 15px;
+  background: rgb(51, 51, 51);
+  border-radius: 20px;
+  transition: all 0.6s;
+  font-size: 13px;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.025em;
+  font-weight: 700;
+
+  &:hover {
+    opacity: .7;
+  }
+`;
 const DarkButton = styled.button`
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 const Text = styled.span`
   cursor: pointer;

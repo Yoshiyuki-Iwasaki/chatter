@@ -1,5 +1,3 @@
-import firebase from "../../firebase/clientApp";
-import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
@@ -14,14 +12,14 @@ const Sidebar: React.FC<SidebarType> = ({ uid, photoURL, displayName }) => {
 
   return (
     <SidebarArea>
-      <Title>ユーザーリスト</Title>
+      <Title>グループリスト</Title>
       <List>
         <ListItem onClick={() => SendToMychat()}>
           <ListInner>
             <IconArea>
               <Icon src={photoURL} />
             </IconArea>
-            <Text>{displayName}</Text>
+            <Text>マイチャット</Text>
           </ListInner>
         </ListItem>
         <SidebarList currentUserId={uid} />
