@@ -46,7 +46,7 @@ const Header: React.FC<TitleType> = ({ title }) => {
               <GroupeButton onClick={createGroupeChat}>
                 グループ作成
               </GroupeButton>
-              {show && <Modal setShow={setShow} />}
+              {show && <Modal currentUserId={user.uid} setShow={setShow} />}
               <DarkButton onClick={toggleDarkMode}>
                 {theme == "dark" ? "🌑" : "🌝"}
               </DarkButton>

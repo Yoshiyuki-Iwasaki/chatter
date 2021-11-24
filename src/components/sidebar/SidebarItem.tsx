@@ -1,40 +1,22 @@
-import { useRouter } from "next/router";
-import firebase from "../../firebase/clientApp";
 import styled from "styled-components";
-import getRecipient from "../../utils/getRecipient";
 import { SidebarItemType } from "../../declarations/sidebar";
+import Link from 'next/link'
 
 const SidebarItem: React.FC<SidebarItemType> = ({
-  currentUserId,
-  chatList,
-  uid,
-  photoURL,
-  displayName,
+  id,
+  title,
 }) => {
-  const db = firebase.firestore();
-  const router = useRouter();
-  const createChatRoom = async userId => {
-    await chatList?.docs.map(doc => {
-      if (getRecipient(doc.data().users, currentUserId)) {
-        router.push(`/chat/${doc.id}`);
-      } else {
-        db.collection("chat").add({
-          id: new Date().getTime(),
-          users: [userId, currentUserId],
-        });
-        router.push(`/chat/${doc.id}`);
-      }
-    });
-  };
 
   return (
-    <ListItem onClick={() => createChatRoom(uid)}>
-      <ListInner>
-        <IconArea>
-          <Icon src={photoURL} />
-        </IconArea>
-        <Text>{displayName}</Text>
-      </ListInner>
+    <ListItem>
+      <Link href={`/chat/${id}`} as={`/chat/${id}`} passHref>
+        <ListInner>
+          {/* <IconArea>
+            <Icon src={title} />
+          </IconArea> */}
+          <Text>{title}</Text>
+        </ListInner>
+      </Link>
     </ListItem>
   );
 };

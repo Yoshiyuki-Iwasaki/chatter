@@ -5,11 +5,8 @@ export type SidebarType = {
 };
 
 export type SidebarItemType = {
-  currentUserId?: number;
-  chatList: any;
-  uid: number;
-  photoURL: string;
-  displayName: string;
+  id: any;
+  title: string;
 };
 
 export type SidebarListType = {
