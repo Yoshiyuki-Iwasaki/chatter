@@ -17,14 +17,7 @@ const ChatDetail = ({ todo }) => {
 
 export default ChatDetail;
 
-export const getStaticPaths = async () => {
-  const db = firebase.firestore();
-  const res = await db.collection("chat").get();
-  const paths = res.docs.map(todo => `/chat/${todo.id}`);
-  return { paths, fallback: false };
-};
-
-export const getStaticProps = async context => {
+export const getServerSideProps = async context => {
   const db = firebase.firestore();
   const id = context.params.id;
   const res = await db.collection("chat").get();
@@ -33,6 +26,7 @@ export const getStaticProps = async context => {
   return {
     props: {
       todo: array,
+      ssrWorking: true,
     },
   };
 };
