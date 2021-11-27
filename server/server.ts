@@ -19,8 +19,8 @@ exports.createUserDocument = functions.auth.user().onCreate(user => {
     .set(JSON.parse(JSON.stringify(user)));
 });
 
-exports.nextApp = functions.https.onRequest((req, res) => {
-  return nextjsServer.prepare().then(() => {
-    return nextjsHandle(req, res);
-  });
-});
+// exports.nextApp = functions.https.onRequest((req, res) => {
+//   return nextjsServer.prepare().then(() => {
+//     return nextjsHandle(req, res);
+//   });
+// });
