@@ -20,17 +20,6 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
 
   return (
     <>
-      <List id="message-list">
-        {data &&
-          data.docs.map(
-            (
-              doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>,
-              index: number
-            ) => (
-              <p>test</p>
-            )
-          )}
-      </List>
       <ChatInput id={id} />
     </>
   );
