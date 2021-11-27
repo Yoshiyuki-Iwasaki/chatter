@@ -1,5 +1,3 @@
-import firebase from "../../firebase/clientApp";
-import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import SidebarList from "./SidebarList";
 import { useRouter } from "next/router";
@@ -13,24 +11,39 @@ const Sidebar: React.FC<SidebarType> = ({ uid, photoURL, displayName }) => {
   };
 
   return (
-    <>
-      <Title>ユーザーリスト</Title>
+    <SidebarArea>
+      <Title>グループリスト</Title>
       <List>
         <ListItem onClick={() => SendToMychat()}>
           <ListInner>
             <IconArea>
               <Icon src={photoURL} />
             </IconArea>
-            <Text>{displayName}</Text>
+            <Text>マイチャット</Text>
           </ListInner>
         </ListItem>
         <SidebarList currentUserId={uid} />
       </List>
-    </>
+    </SidebarArea>
   );
 };
 
 export default Sidebar;
+
+const SidebarArea = styled.aside`
+  display: block;
+  width: calc(100% / 5);
+
+  @media (max-width: 768px) {
+    display: none;
+    position: fixed;
+    top: 70 px;
+    left: 0;
+    width: 100%;
+    height: calc(100 vh - 70 px);
+    z-index: 10;
+  }
+`;
 
 const Title = styled.h2`
   margin-top: ${props => (props.marginTop ? props.marginTop : "")};
@@ -42,6 +55,10 @@ const Title = styled.h2`
 const List = styled.ul`
   height: calc(100vh - 131px);
   overflow: scroll;
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+  }
 `;
 const ListItem = styled.li`
   border-bottom: 1px solid gray;

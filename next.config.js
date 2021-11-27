@@ -1,2 +1,3 @@
 module.exports = {
-};
+  distDir: ".next",
+}

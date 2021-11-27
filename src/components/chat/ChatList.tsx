@@ -1,6 +1,6 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
-import ChatItem from "../chat/ChatItem";
+import ChatItem from "./ChatItem";
 import ChatInput from "./ChatInput";
 import { ChatListType } from "../../declarations/chat";
 import styled from "styled-components";
@@ -9,8 +9,9 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
   const db = firebase.firestore();
   const [data, loading, error] = useCollection(
     db
-      .collection("mychat")
-      .where("userId", "==", id)
+      .collection("chat")
+      .doc(id)
+      .collection("messages")
       .orderBy("createdAt", "asc"),
     {}
   );
@@ -37,7 +38,7 @@ const ChatList: React.FC<ChatListType> = ({ id }) => {
             )
           )}
       </List>
-      <ChatInput />
+      <ChatInput id={id} />
     </>
   );
 };

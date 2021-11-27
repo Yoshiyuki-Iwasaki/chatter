@@ -1,8 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { useState } from 'react';
 import firebase from "../../firebase/clientApp";
+import { ChatListType } from "../../declarations/chat";
 
-const ChatInput: React.FC = () => {
+const ChatInput: React.FC<ChatListType> = ({ id }) => {
   const db = firebase.firestore();
   const [text, setText] = useState<string>("");
 
@@ -21,7 +22,7 @@ const ChatInput: React.FC = () => {
   const handleOnSubmit = async e => {
     e.preventDefault();
     if (!text) return;
-    await db.collection("mychat").add({
+    await db.collection("chat").doc(id).collection("messages").add({
       id: new Date().getTime(),
       message: text,
       userId: firebase.auth().currentUser.uid,
@@ -54,6 +55,6 @@ const StyledInput = styled.input`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: 100px;
+    height: 70px;
   }
 `;

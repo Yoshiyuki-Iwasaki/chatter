@@ -1,16 +1,27 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import Link from 'next/link';
 import { DarkModeContext } from "../../context/DarkModeContext";
+import { COLORS } from '../../utils/variable';
+import Modal from "./Modal";
 
-const Header: React.FC = () => {
+type TitleType = {
+  title:string;
+};
+
+const Header: React.FC<TitleType> = ({ title }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
+  const [show, setShow] = useState<boolean>(false);
 
   const logout = () => {
     firebase.auth().signOut();
+  };
+
+  const createGroupeChat = () => {
+    setShow(!show);
   };
 
   if (loading) return <h6>Loading...</h6>;
@@ -24,9 +35,18 @@ const Header: React.FC = () => {
             <Logo>chatter</Logo>
           </Link>
         </Title>
+        <SpTitle>
+          <Link href="/" as="/" passHref>
+            <SpLogo>{title}</SpLogo>
+          </Link>
+        </SpTitle>
         {user && (
           <>
             <LeftArea>
+              <GroupeButton onClick={createGroupeChat}>
+                グループ作成
+              </GroupeButton>
+              {show && <Modal currentUserId={user.uid} setShow={setShow} />}
               <DarkButton onClick={toggleDarkMode}>
                 {theme == "dark" ? "🌑" : "🌝"}
               </DarkButton>
@@ -38,6 +58,11 @@ const Header: React.FC = () => {
                   <Text>{user.displayName}</Text>
                 </Wrapper>
                 <List>
+                  <ListItem>
+                    <Link href="./userList" as="./userList" passHref>
+                      <a>ユーザーリスト</a>
+                    </Link>
+                  </ListItem>
                   <ListItem>
                     <Button onClick={() => logout()}>ログアウト</Button>
                   </ListItem>
@@ -60,19 +85,53 @@ const HeaderLayout = styled.header`
 `;
 const Inner = styled.div`
   margin: 0 auto;
-  padding: 15px 30px;
+  padding: 15px 25px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    padding: 5px 15px;
+  }
 `;
-const Title = styled.div``;
+const Title = styled.h1`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 const Logo = styled.a`
   transition: opacity 0.6s;
   cursor: pointer;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.025em;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+const SpTitle = styled.h1`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+const SpLogo = styled.a`
+  display: none;
+  transition: opacity 0.6s;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
 
   &:hover {
     opacity: 0.6;
@@ -83,8 +142,23 @@ const LeftArea = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const GroupeButton = styled.button`
+  margin-right: 15px;
+  padding: 10px 15px;
+  background: rgb(51, 51, 51);
+  border-radius: 20px;
+  transition: all 0.6s;
+  font-size: 13px;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.025em;
+  font-weight: 700;
+
+  &:hover {
+    opacity: .7;
+  }
+`;
 const DarkButton = styled.button`
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 const Text = styled.span`
   cursor: pointer;
@@ -149,7 +223,7 @@ const Button = styled.a`
   cursor: pointer;
   width: 200px;
   font-size: 13px;
-  color:#fff;
+  color: ${COLORS.WHITE};
   font-weight: 700;
   transition: opacity 0.6s;
 
